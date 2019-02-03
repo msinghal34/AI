@@ -1,0 +1,9 @@
+1)	Python Related Syntax
+	a)	https://docs.python.org/3/tutorial/classes.html
+	b)	https://docs.python.org/3/library/stdtypes.html
+	c)	https://docs.python.org/3/library/stdtypes.html#frozenset
+	d)	https://docs.python.org/3/tutorial/controlflow.html
+	e)	https://docs.python.org/2/
+	f)	https://docs.python.org/3/
+2)	Numpy Related Syntax
+	a)	http://cs231n.github.io/python-numpy-tutorial/

@@ -79,7 +79,17 @@ class Perceptron1v1Classifier:
 					
 
 				# "*** YOUR CODE HERE ***"
-				util.raiseNotDefined()
+				trainData = trainingData[i]
+				trainDataLabel = trainingLabels[i]
+				for label_ind in range(len(self.legalLabels)):
+					if trainDataLabel < self.legalLabels[label_ind]:
+						if self.weights[frozenset([trainDataLabel, self.legalLabels[label_ind]])] * trainData > 0:
+							self.weights[frozenset([trainDataLabel, self.legalLabels[label_ind]])] -= trainData
+					elif trainDataLabel > self.legalLabels[label_ind]:
+						if self.weights[frozenset([self.legalLabels[label_ind], trainDataLabel])] * trainData <= 0:
+							self.weights[frozenset([self.legalLabels[label_ind], trainDataLabel])] += trainData
+
+				# util.raiseNotDefined()
 				
 		## Do not edit code below
 
