@@ -47,8 +47,8 @@ def enhancedFeatureExtractorDigit(datum):
 
 	## DESCRIBE YOUR ENHANCED FEATURES HERE...
 	After trying a lot of features, I found this setting to be most useful.
-	1)	(Area/Perimeter) * 100
-	2)  Y-Gradient * 10
+	1)	(Area/Perimeter) * 100 - This feature tries to get the relative area of the shape
+	2)  Y-Gradient * 10 - This feature gets the amount of horizontal edges in the shape
 	##
 	"""
 

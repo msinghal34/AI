@@ -1,7 +1,32 @@
 TASK 2
-1)
-2)
-2.1)
+	1)
+		a)	The training and testing accuracy both increase as number of data points seen increase. But after seeing a satisfactory number of data points (i.e., 1600) it kind of remains same and keeps fluctuating a little bit. It is expected because as we see more training examples we get more information about the general data and thus it leads to good classififcation accuracy. But after seeing a satisfactory amount of data we don't get any extra information and classification accuracy remains almost same.
+
+		b)	The training accuracy is usually more than the testing accuracy. This is also expected because the classifier learns from training data and tries to classify the training data best. So, when we use it over unseen testing data it classifies a little less accurately.
+
+		c)	With default number of iterations the training accuracy saturates at around 85% and testing accuracy saturates near 80%. But when we either decrease or increase the number of iterations, the accuracy remains almost same. It might be because of the design of perceptron learning algorithm. It learns a good separating hyperplane in a single iteration only and finds an average local optima. So, more number of iterations doesn't give any benefit.
+
+
+	2)
+		a)	The training accuracy keeps decreasing when we increase the training data size. It is because as data size increase the variance in data increases and finding a perfect separating hyperplane becomes a tough job for perceptron classifier.
+
+		b)	The testing accuracy keeps increasing when we increase the training data size. It is because as data size increase the classifier gets to know more about the general structure of data and classifies the unseen test data better.
+
+		c)	 The training accuracy is usually more than the testing accuracy. This is also expected because the classifier learns from training data and tries to classify the training data best. So, when we use it over unseen testing data it classifies it less accurately.
+
+
+	2.1)	
+	The classifier will make ad-hoc choice which depends on the initialization of the weights. The expected accuracy of such a classifier would be (1/k)*100 where k is the number of classes.
+
 
 TASK 3
-3.1)
+	3.1)	When the training size is 800 then the testing accuracy of:
+				1vr - 71.3%
+				1v1 - 71.5%
+			(D1) When the training size is 80000 then the testing accuracy of:
+				1vr - 73.8%
+				1v1	- 78.8%
+			
+			Observation:	When the training data size is less both 1v1 & 1vr does almost same job. But when the training size increases, perceptron1v1 does a better job than perceptron1vr.
+
+			Explanation:	1v1 has a large number of weights which can help in classifying data better. But when 1v1 is trained on a smaller dataset it tends to overfit and doesn't generalize better leading to almost same accuracy as 1vr. But when 1v1 gets a large training dataset it doesn't overfit and generalizes better leading to a significant more accuracy than 1v1.
