@@ -30,7 +30,9 @@ class FullyConnectedLayer:
 
 		###############################################
 		# TASK 1 - YOUR CODE HERE
-		raise NotImplementedError
+		self.data = (np.dot(X, self.weights) + self.biases)
+		return sigmoid(self.data)
+		# raise NotImplementedError
 		###############################################
 		
 	def backwardpass(self, lr, activation_prev, delta):
@@ -46,6 +48,7 @@ class FullyConnectedLayer:
 
 		###############################################
 		# TASK 2 - YOUR CODE HERE
+		
 		raise NotImplementedError
 		###############################################
 
@@ -70,7 +73,7 @@ class ConvolutionLayer:
 		
 		# Initializes the Weights and Biases using a Normal Distribution with Mean 0 and Standard Deviation 0.1
 		self.weights = np.random.normal(0,0.1, (self.out_depth, self.in_depth, self.filter_row, self.filter_col))	
-		self.biases = np.random.normal(0,0.1,self.out_depth)
+		self.biases = np.random.normal(0,0.1, self.out_depth)
 		
 
 	def forwardpass(self, X):
@@ -80,12 +83,22 @@ class ConvolutionLayer:
 		# Output
 		# activations : Activations after one forward pass through this layer
 		n = X.shape[0]  # batch size
-		# INPUT activation matrix  		:[n X self.in_channels[0] X self.in_channels[1] X self.in_channels[2]]
-		# OUTPUT activation matrix		:[n X self.outputsize[0] X self.outputsize[1] X self.numfilters]
+		# INPUT activation matrix  		:[n X self.in_depth X self.in_row X self.in_col]
+		# OUTPUT activation matrix		:[n X self.out_depth X self.out_row X self.out_col]
 
 		###############################################
 		# TASK 1 - YOUR CODE HERE
-		raise NotImplementedError
+		temp = np.zeros((n, self.out_depth, self.out_row, self.out_col))
+		for z in range(n):
+			for k in range(0, self.out_depth):
+				for i in range(0, self.in_row - self.filter_row + 1, self.stride):
+					for j in range(0, self.in_col - self.filter_col + 1, self.stride):
+						temp[z, k, (i // self.stride), (j // self.stride)] \
+						= sum(sum(sum(X[z, 0:self.in_depth, i:i+self.filter_row, j:j+self.filter_col] * self.weights[k])))
+				temp[z, k, 0:, 0:] = temp[z, k, 0:, 0:] + self.biases[k]
+		self.data = temp
+		return sigmoid(self.data)
+		# raise NotImplementedError
 		###############################################
 
 	def backwardpass(self, lr, activation_prev, delta):
@@ -129,12 +142,19 @@ class AvgPoolingLayer:
 		# activations : Activations after one forward pass through this layer
 		
 		n = X.shape[0]  # batch size
-		# INPUT activation matrix  		:[n X self.in_channels[0] X self.in_channels[1] X self.in_channels[2]]
-		# OUTPUT activation matrix		:[n X self.outputsize[0] X self.outputsize[1] X self.in_channels[2]]
+		# INPUT activation matrix  		:[n X self.in_depth X self.in_row X self.in_col]
+		# OUTPUT activation matrix		:[n X self.out_depth X self.out_row X self.out_col]
 
 		###############################################
 		# TASK 1 - YOUR CODE HERE
-		raise NotImplementedError
+		temp = np.zeros((n, self.out_depth, self.out_row, self.out_col))
+		for z in range(n):
+			for k in range(0, self.out_depth):
+				for i in range(0, self.in_row - self.filter_row + 1, self.stride):
+					for j in range(0, self.in_col - self.filter_col + 1, self.stride):
+						temp[z, k, i // self.stride, j // self.stride] = np.average(X[z, k, i:i+self.stride, j:j+self.stride])
+		return temp
+		# raise NotImplementedError
 		###############################################
 
 
