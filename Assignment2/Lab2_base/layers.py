@@ -36,6 +36,7 @@ class FullyConnectedLayer:
 		###############################################
 		
 	def backwardpass(self, lr, activation_prev, delta):
+		# print('Backward FC ',self.weights.shape)
 		# Input
 		# lr : learning rate of the neural network
 		# activation_prev : Activations from previous layer
@@ -48,8 +49,12 @@ class FullyConnectedLayer:
 
 		###############################################
 		# TASK 2 - YOUR CODE HERE
-		
-		raise NotImplementedError
+		delSigma = delta*derivative_sigmoid(self.data) # n X out_nodes
+		new_delta = np.dot(delSigma, self.weights.transpose()) # n X in_nodes
+		self.weights -= lr*(np.dot((activation_prev.transpose()), delSigma)) # in_nodes X out_nodes
+		self.biases -= lr*sum(delSigma) # 1 X out_nodes
+		return new_delta
+		# raise NotImplementedError
 		###############################################
 
 class ConvolutionLayer:
@@ -102,6 +107,7 @@ class ConvolutionLayer:
 		###############################################
 
 	def backwardpass(self, lr, activation_prev, delta):
+		# print('Backward CN ',self.weights.shape)
 		# Input
 		# lr : learning rate of the neural network
 		# activation_prev : Activations from previous layer
@@ -114,9 +120,43 @@ class ConvolutionLayer:
 
 		###############################################
 		# TASK 2 - YOUR CODE HERE
-		raise NotImplementedError
+		# print("-------------------------")
+		# print(activation_prev.shape)
+		# print(delta.shape)
+		# print(self.data.shape)
+		# print(self.weights.shape)
+		# print(self.biases.shape)
+		
+		delSigma = delta*derivative_sigmoid(self.data)
+		new_delta = np.zeros(activation_prev.shape)
+
+		# New Delta Calculation
+		for z in range(delta.shape[0]):
+			for k in range(delta.shape[1]):
+				for i in range(delta.shape[2]):
+					for j in range(delta.shape[3]):
+						new_delta[z, :, i*self.stride:i*self.stride+self.filter_row, j*self.stride:j*self.stride+self.filter_col] += \
+						delSigma[z,k,i,j]*self.weights[k, :, :, :]
+
+		# Weights Update
+		gradWeight = np.zeros(self.weights.shape)
+		for z in range(delta.shape[0]):
+			for k in range(delta.shape[1]):
+				for i in range(delta.shape[2]):
+					for j in range(delta.shape[3]):
+						gradWeight[k, :, :, :] += delSigma[z, k, i, j]*\
+						activation_prev[z, :, i*self.stride:i*self.stride+self.filter_row, j*self.stride:j*self.stride+self.filter_col]
+		self.weights -= lr*gradWeight
+
+		# Bias Update
+		gradBias = np.sum(np.sum(np.sum(delSigma, axis=0), axis = 1), axis = 1)
+		self.biases -= lr*gradBias
+
+		# Return New_Delta
+		return new_delta
+		# raise NotImplementedError
 		###############################################
-	
+
 class AvgPoolingLayer:
 	def __init__(self, in_channels, filter_size, stride):
 		# Method to initialize a Convolution Layer
@@ -135,7 +175,7 @@ class AvgPoolingLayer:
 		self.out_col = int((self.in_col - self.filter_col)/self.stride + 1)
 
 	def forwardpass(self, X):
-		# print('Forward MP ')
+		# print('Forward AvgPoolingLayer ')
 		# Input
 		# X : Activations from previous layer/input
 		# Output
@@ -159,6 +199,7 @@ class AvgPoolingLayer:
 
 
 	def backwardpass(self, alpha, activation_prev, delta):
+		# print('Backward AvgPoolingLayer ')
 		# Input
 		# lr : learning rate of the neural network
 		# activation_prev : Activations from previous layer
@@ -171,7 +212,11 @@ class AvgPoolingLayer:
 
 		###############################################
 		# TASK 2 - YOUR CODE HERE
-		raise NotImplementedError
+		avgFac = self.stride*self.stride
+		delta /= avgFac
+		new_delta = np.repeat(np.repeat(delta, self.stride, axis = 3), self.stride, axis = 2)
+		return new_delta
+		# raise NotImplementedError
 		###############################################
 
 
@@ -181,12 +226,13 @@ class FlattenLayer:
         pass
     
     def forwardpass(self, X):
+        # print('Forward FlattenLayer ')
         self.in_batch, self.r, self.c, self.k = X.shape
         return X.reshape(self.in_batch, self.r * self.c * self.k)
 
     def backwardpass(self, lr, activation_prev, delta):
-        return delta.reshape(self.in_batch, self.r, self.c, self.k)
-
+    	# print('Backward FlattenLayer ')
+    	return delta.reshape(self.in_batch, self.r, self.c, self.k)
 
 # Helper Function for the activation and its derivative
 def sigmoid(x):
