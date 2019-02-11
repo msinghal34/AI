@@ -104,9 +104,6 @@ class NeuralNetwork:
 				np.save(modelName, model)
 				print("Model Saved... ")
 
-			# if epoch == 15 or epoch == 20 or epoch == 25:
-			# 	_, validAcc = self.validate(validX, validY)
-			# 	print("Validation Set Accuracy: ", validAcc, "%")
 			# Estimate the prediction accuracy over validation data set
 			if validX is not None and validY is not None and printValStats:
 				_, validAcc = self.validate(validX, validY)

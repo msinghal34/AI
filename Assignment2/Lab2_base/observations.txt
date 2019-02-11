@@ -1,0 +1,86 @@
+ASSIGNMENT 2:
+General Trends:
+a)	When number of epochs increase, accuracy usually increases atleast when alpha is sufficiently small.
+b)	Alpha depends from task to task
+c)	Batch Size should not be very less but order of 20 is mostly okay.
+
+1)	taskSquare Minimal Topology:
+		out_nodes = 2
+		alpha = 0.15
+		batchSize = 15
+		epochs = 20
+		seed = 1
+		
+		nn1.addLayer(FullyConnectedLayer(2, 4))
+		nn1.addLayer(FullyConnectedLayer(4, 2))
+
+		Test Accuracy	98.5 %
+
+		It is minimal because when I reduce it to 3, it is not able to separate data properly. I got the hyperparameters after doing validation. 
+
+
+2)	taskSemiCircle Minimal Topology:
+		out_nodes = 2
+		alpha = 0.05
+		batchSize = 30
+		epochs = 20
+		seed = 2
+
+		nn1.addLayer(FullyConnectedLayer(2, 2))
+		nn1.addLayer(FullyConnectedLayer(2, 2))
+
+		Test Accuracy  97.7 %
+
+		It is minimal because when I reduce it to 1, it is not able to separate data properly. I got the hyperparameters after doing validation. 
+
+
+3)	taskMNIST:
+	
+	Minimal Topology:
+		out_nodes = 10
+		alpha = 0.01
+		batchSize = 5
+		epochs = 15
+		seed = 3
+
+		nn1.addLayer(FullyConnectedLayer(784, 9))
+		nn1.addLayer(FullyConnectedLayer(9, 10))
+
+		Test Accuracy	91.44 %
+
+	But I am using following topology, just to have a safer side for some random seed value which might cause problems:
+		
+		out_nodes = 10
+		alpha = 0.02
+		batchSize = 5
+		epochs = 15
+		seed = 3
+
+		nn1.addLayer(FullyConnectedLayer(784, 12))
+		nn1.addLayer(FullyConnectedLayer(12, 10))
+
+		Test Accuracy	92.2 %
+
+	
+
+4)	taskCIFAR10:
+	It would have taken days of training to find a minimal topology. But it is somewhat minimal. I had to use 2 FullyConnectedLayer because 1 such layer was not sufficient. And all other parameters seems to be small.
+
+		out_nodes = 10
+		alpha = 0.1
+		batchSize = 20
+		epochs = 30
+		seed = 4
+
+		Training Size 		10000
+		Validation Size 	1000
+		Testing Size 		1000
+
+		nn1.addLayer(ConvolutionLayer([3, 32, 32], [4, 4], 4, 2))
+		nn1.addLayer(AvgPoolingLayer([4, 15, 15], [3, 3], 3))
+		nn1.addLayer(FlattenLayer())
+		nn1.addLayer(FullyConnectedLayer(100, 25))
+		nn1.addLayer(FullyConnectedLayer(25, 10))
+
+		Test Accuracy	45.9 %
+

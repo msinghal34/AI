@@ -1,0 +1,271 @@
+Epoch:  0
+Epoch  0  Training Loss= 0.09128737528819969  Training Accuracy= 9.82
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  10.299999999999999 %
+Epoch:  1
+Epoch  1  Training Loss= 0.08698006818649613  Training Accuracy= 15.48
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  21.4 %
+Epoch:  2
+Epoch  2  Training Loss= 0.08655530563940408  Training Accuracy= 21.05
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  23.200000000000003 %
+Epoch:  3
+Epoch  3  Training Loss= 0.08375898500198613  Training Accuracy= 23.77
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  24.8 %
+Epoch:  4
+Epoch  4  Training Loss= 0.08264467228229552  Training Accuracy= 26.24
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  24.6 %
+Epoch:  5
+Epoch  5  Training Loss= 0.08174946563052561  Training Accuracy= 27.55
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  28.299999999999997 %
+Epoch:  6
+Epoch  6  Training Loss= 0.09410678317769934  Training Accuracy= 29.98
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  32.300000000000004 %
+Epoch:  7
+Epoch  7  Training Loss= 0.08169761802849011  Training Accuracy= 31.89
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  36.199999999999996 %
+Epoch:  8
+Epoch  8  Training Loss= 0.08675786970939862  Training Accuracy= 34.32
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  36.4 %
+Epoch:  9
+Epoch  9  Training Loss= 0.0724881029386974  Training Accuracy= 35.16
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  35.3 %
+Epoch:  10
+Epoch  10  Training Loss= 0.0770949250866642  Training Accuracy= 36.6
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  38.2 %
+Epoch:  11
+Epoch  11  Training Loss= 0.07088305338110792  Training Accuracy= 38.73
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  39.4 %
+Epoch:  12
+Epoch  12  Training Loss= 0.07047833418641815  Training Accuracy= 38.65
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  38.6 %
+Epoch:  13
+Epoch  13  Training Loss= 0.07163175457336149  Training Accuracy= 39.84
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  38.2 %
+Epoch:  14
+Epoch  14  Training Loss= 0.06770555136539612  Training Accuracy= 40.48
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  40.300000000000004 %
+Epoch:  15
+Epoch  15  Training Loss= 0.0747234505116651  Training Accuracy= 41.64
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  40.400000000000006 %
+Epoch:  16
+Epoch  16  Training Loss= 0.0780109423483761  Training Accuracy= 42.21
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  42.0 %
+Epoch:  17
+Epoch  17  Training Loss= 0.0676491705563589  Training Accuracy= 43.17
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  43.3 %
+Epoch:  18
+Epoch  18  Training Loss= 0.06539622836266165  Training Accuracy= 43.53
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  41.8 %
+Epoch:  19
+Epoch  19  Training Loss= 0.058361672009537686  Training Accuracy= 44.08
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  43.3 %
+Epoch:  20
+Epoch  20  Training Loss= 0.08385995303934315  Training Accuracy= 44.96
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  43.9 %
+Epoch:  21
+Epoch  21  Training Loss= 0.07311400219917981  Training Accuracy= 45.38
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  42.8 %
+Epoch:  22
+Epoch  22  Training Loss= 0.07995814192420148  Training Accuracy= 46.07
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  44.2 %
+Epoch:  23
+Epoch  23  Training Loss= 0.0685476060889796  Training Accuracy= 46.76
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  46.800000000000004 %
+Epoch:  24
+Epoch  24  Training Loss= 0.07327243887100893  Training Accuracy= 46.56
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  45.9 %
+Epoch:  25
+Epoch  25  Training Loss= 0.06622079525485741  Training Accuracy= 47.17
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  45.7 %
+Epoch:  26
+Epoch  26  Training Loss= 0.05979725310807815  Training Accuracy= 47.75
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  46.2 %
+Epoch:  27
+Epoch  27  Training Loss= 0.061057250982333465  Training Accuracy= 47.71
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  43.9 %
+Epoch:  28
+Epoch  28  Training Loss= 0.07407823118449107  Training Accuracy= 47.65
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  46.5 %
+Epoch:  29
+Epoch  29  Training Loss= 0.06827400373895  Training Accuracy= 48.41
+ConvolutionLayer
+AvgPoolingLayer
+FlattenLayer
+FullyConnectedLayer
+FullyConnectedLayer
+Model Saved... 
+Validation Set Accuracy:  45.9 %
+Test Accuracy  45.9
