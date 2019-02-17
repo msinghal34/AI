@@ -1,0 +1,14 @@
+https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/la-3/lab-assignment-3.html
+
+1)	Python Related Syntax
+	a)	https://docs.python.org/2/
+	b)	https://docs.python.org/2/library/random.html
+2)	Numpy Related Syntax
+	a)	http://cs231n.github.io/python-numpy-tutorial/
+	b)  https://docs.scipy.org/doc/numpy/
+	c)	https://docs.scipy.org/doc/numpy-1.9.2/reference/generated/numpy.sum.html
+	d)	https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.repeat.html
+	e)	https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.dot.html
+	f)	https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.transpose.html
+3)	Ensemble Methods
+	a)	Section 18.10, Russell and Norvig (2010).

@@ -1,0 +1,68 @@
+Assignment 3:	Mayank Singhal (160050039)
+###################################################################
+						OBSERVATIONS
+###################################################################
+BAGGING: 
+
+Nature of Plot (Accuracy vs number of classifiers): On increasing number of classifiers, training accuracy keeps increasing. Testing and validation accuracy increase in the beginning and then almost saturates. Training accuracy is always higher than the other two.
+
+1)	No. of iterations:	On increasing number of iterations, the training accuracy is increasing but the testing accuracy is almost same. It is becuase on increasing number of iterations, the base learners starts fitting training data more better but for classifying testing data ensemble has almost saturated.
+
+	No. of iterations	Training accuracy 	Testing Accuracy
+			1				88.4				77.4
+			2				90.6				76.7	
+			3				91.1				78.1
+			5				93.2				78.9
+
+2)	Training Data Size: On increasing training data size, testing accuracy increases because the classifier gets to see more variety of data and thus perform better on more varied test data later. Training accuracy decreases on increasing training data size because the same model can't fit (or underfits) extra training data using same number of weights.
+
+	Training Data Size	Training accuracy 	Testing Accuracy
+			500				94.8				76.6
+			1000			91.1				78.1	
+			5000			88.4				80.8
+
+3)	Ratio:	More the ratio the better the sample we are taking from original training dataset which matches the original dataset statistically. If the ratio is less, the sampled data may be biased. Because of this both training accuracy and testing accuracy increases on increasing ratio because dataset becomes free of skewness.
+
+	Ratio				Training accuracy 	Testing Accuracy
+	0.5						88.4				76.4
+	1						91.1				78.1
+	2						94.1				78.8
+
+###################################################################
+BOOSTING:
+
+Nature of Plot (Accuracy vs boosting_iterations): Training accuracy increases sharply in the beginning and then increases gradually later. Testing and Validation accuracies increases sharply in beginning and then increases gradually and finally saturates. Training accuracy is always higher than the other two.
+
+1)	No. of iterations:	On increasing number of iterations, the training accuracy is increasing but the testing accuracy is almost same. It is becuase on increasing number of iterations, the base learners starts fitting training data more better but for classifying testing data ensemble has almost saturated.
+
+	No. of iterations	Training accuracy 	Testing Accuracy
+			1				87.4				75.4
+			2				89.3				74.4	
+			3				90.4				75.5
+			5				92.3				75.5
+
+2)	Training Data Size: On increasing training data size, testing accuracy increases because the classifier gets to see more variety of data and thus perform better on more varied test data later. Training accuracy decreases on increasing training data size because the same model can't fit ( or underfits) extra training data using same number of weights.
+
+	Training Data Size	Training accuracy 	Testing Accuracy
+			500				87.8				73.5
+			1000			90.4				75.5	
+			5000			85.0				79.1
+
+###################################################################
+						ANSWERS
+###################################################################
+1)	Compare the training accuracies of both the algorithms and explain your observations from a theoretical point of view.
+
+Ans)	Theoretically, training accuracy of boosting can reach 100% for sufficiently large number of boosting iterations. But there is no such guarantee for bagging. So, for large number of boosting iterations I expected that boosting training accuracy will exceed bagging training accuracy. So, I made plots upto 60 number of iterations. Also, I took size of sampled data twice of original dataset for boosting to avoid skewness.
+Training accuracy of bagging starts from 87.8% for 1 classifier and then gradually increases to 92.2% for 60 classifers.
+Training accuracy of boosting starts from 87.4% for 1 iteration and then gradually increases to 94.1% for 60 iterations.
+So, finally boosting training accuracy is overshooting bagging training accuracy which is theoretically justifiable.
+
+2)	"An ensemble combining perceptrons with weighted majority cannot be represented as an equivalent single perceptron." IS the above statement true? Give proper justification to your claim and accompany with examples if possible.
+
+Ans)	This statement is absolutely true. A single perceptron (no matter what it's weights or biases are) can only classify linearly separable data without using feature engineering whereas an ensemble can find non linear patterns without using feature engineering. 
+
+Consider this example:
+There are two classes (+) & (-) in 2D space. Negative examples form a triangle in some quadrant and are surrounded by positie examples everywhere outside the triangle. Clearly, this kind of dataset is not linearly separable and cannot be classfied correctly using a single perceptron. But if we have an ensemble of three perceptrons then, it can very well learn to classify this dataset accurately where each perceptron forms one side of the triangular boundary and classify everything towards the triangle as negative. Now, using majority voting, only the datapoints inside the triangle will be classified as negative and rest as positive. Thus, an ensemble combining perceptrons with weighted majority cannot be represented as an equivalent single perceptron.
+
+###################################################################

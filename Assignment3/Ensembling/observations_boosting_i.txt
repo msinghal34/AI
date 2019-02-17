@@ -1,0 +1,53 @@
+singhal@sl2-36:~/Videos/AI/Assignment3/Ensembling$ python dataClassifier.py -c boosting -t 1000 -s 1000 -b 20 -i 1
+Doing classification
+--------------------
+classifier:		boosting
+num of boosting iterations:20
+training set size:	1000
+Extracting features...
+Training...
+874 correct out of 1000 (87.4%).
+Validating...
+756 correct out of 1000 (75.6%).
+Testing...
+754 correct out of 1000 (75.4%).
+singhal@sl2-36:~/Videos/AI/Assignment3/Ensembling$ python dataClassifier.py -c boosting -t 1000 -s 1000 -b 20 -i 2
+Doing classification
+--------------------
+classifier:		boosting
+num of boosting iterations:20
+training set size:	1000
+Extracting features...
+Training...
+893 correct out of 1000 (89.3%).
+Validating...
+752 correct out of 1000 (75.2%).
+Testing...
+744 correct out of 1000 (74.4%).
+singhal@sl2-36:~/Videos/AI/Assignment3/Ensembling$ python dataClassifier.py -c boosting -t 1000 -s 1000 -b 20 -i 3
+Doing classification
+--------------------
+classifier:		boosting
+num of boosting iterations:20
+training set size:	1000
+Extracting features...
+Training...
+904 correct out of 1000 (90.4%).
+Validating...
+764 correct out of 1000 (76.4%).
+Testing...
+755 correct out of 1000 (75.5%). 
+singhal@sl2-36:~/Videos/AI/Assignment3/Ensembling$ python dataClassifier.py -c boosting -t 1000 -s 1000 -b 20 -i 5
+Doing classification
+--------------------
+classifier:		boosting
+num of boosting iterations:20
+training set size:	1000
+Extracting features...
+Training...
+923 correct out of 1000 (92.3%).
+Validating...
+767 correct out of 1000 (76.7%).
+Testing...
+755 correct out of 1000 (75.5%).
+

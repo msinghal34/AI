@@ -1,0 +1,41 @@
+singhal@sl2-36:~/Videos/AI/Assignment3/Ensembling$ python dataClassifier.py -c bagging -t 5000 -s 1000 -r 1 -n 20
+Doing classification
+--------------------
+classifier:		bagging
+num of weak classifier:20
+training set size:	5000
+Extracting features...
+Training...
+4418 correct out of 5000 (88.4%).
+Validating...
+810 correct out of 1000 (81.0%).
+Testing...
+808 correct out of 1000 (80.8%).
+singhal@sl2-36:~/Videos/AI/Assignment3/Ensembling$ python dataClassifier.py -c bagging -t 500 -s 1000 -r 1 -n 20
+Doing classification
+--------------------
+classifier:		bagging
+num of weak classifier:20
+training set size:	500
+Extracting features...
+Training...
+474 correct out of 500 (94.8%).
+Validating...
+787 correct out of 1000 (78.7%).
+Testing...
+766 correct out of 1000 (76.6%).
+singhal@sl2-36:~/Videos/AI/Assignment3/Ensembling$ python dataClassifier.py -c bagging -t 1000 -s 1000 -r 1 -n 20
+Doing classification
+--------------------
+classifier:		bagging
+num of weak classifier:20
+training set size:	1000
+Extracting features...
+Training...
+911 correct out of 1000 (91.1%).
+Validating...
+779 correct out of 1000 (77.9%).
+Testing...
+781 correct out of 1000 (78.1%).
+singhal@sl2-36:~/Videos/AI/Assignment3/Ensembling$ 
+

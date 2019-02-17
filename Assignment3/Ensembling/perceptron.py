@@ -80,7 +80,7 @@ class PerceptronClassifier:
     def sample_data(self, trainingData, trainingLabels, sample_weights):
         "*** YOUR CODE HERE ***"
         l = len(trainingData)
-        indices = util.nSample(sample_weights, list(range(l)), int(l/2))
+        indices = util.nSample(sample_weights, list(range(l)), int(l/2.0))
         a = [trainingData[index] for index in indices]
         b = [trainingLabels[index] for index in indices]
         return [a, b]

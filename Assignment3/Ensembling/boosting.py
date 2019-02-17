@@ -38,10 +38,6 @@ class AdaBoostClassifier:
         self.features = trainingData[0].keys()
         "*** YOUR CODE HERE ***"
         size = int(len(trainingData))
-        # distribution = [1.0/len(trainingData) for _ in range(len(trainingData))]
-        # indices = util.nSample(distribution, list(range(len(trainingData))), size)
-        # trainingData = [trainingData[k] for k in indices]
-        # trainingLabels = [trainingLabels[k] for k in indices]
 
         weights = [1.0/size for _ in range(size)]
 

@@ -69,5 +69,5 @@ class BaggingClassifier:
             for k in range(len(data)):
                 guesses[k] += guess[k]
         finalGuesses = [util.sign(x) for x in guesses]
-        return finalGuesses     
+        return finalGuesses
         # util.raiseNotDefined()
