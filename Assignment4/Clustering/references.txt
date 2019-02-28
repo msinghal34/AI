@@ -1,0 +1,7 @@
+https://docs.python.org/2/library/random.html#random.sample
+https://stackoverflow.com/questions/5438745/is-it-possible-to-set-a-number-to-nan-or-infinity
+https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
+https://docs.python.org/2/library/functions.html#min
+https://docs.python.org/3.4/howto/sorting.html#sorting-basics
+
+https://en.wikipedia.org/wiki/Median

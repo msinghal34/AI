@@ -25,7 +25,10 @@ def distance_euclidean(p1, p2):
 
 	# TODO [task1]:
 	# Your function must work for all sized tuples.
-
+	distance = 0.0  # Initialization
+	for x1, x2 in zip(p1, p2):
+		distance += (x1 - x2)*(x1 - x2)
+	distance = math.sqrt(distance)
 	########################################
 	return distance
 
@@ -42,7 +45,8 @@ def initialization_forgy(data, k):
 
 	# TODO [task1]:
 	# Initialize the cluster centroids by sampling k unique datapoints from data
-
+	# Chooses k unique random elements from a population sequence.
+	centroids = random.sample(data, k)
 	########################################
 	assert len(centroids) == k
 	return centroids
@@ -62,7 +66,23 @@ def kmeans_iteration_one(data, centroids, distance):
 	# TODO [task1]:
 	# You must find the new cluster centroids.
 	# Perform just 1 iteration (assignment+updation) of k-means algorithm.
-
+	labels = []
+	for _ in range(len(centroids)):
+		labels.append([])
+	for dataPoint in data:
+		distances = tuple([distance(dataPoint, centroid) for centroid in centroids])
+		minimumDistance = min(distances)
+		label = 0
+		for index, dist in enumerate(distances):
+			if minimumDistance == dist:
+				label = index
+		labels[label].append(dataPoint)
+	for i in range(len(labels)):
+		if (labels[i] == []):
+			new_centroids.append(centroids[i])
+		else:
+			new_centroids.append(
+				tuple(sum(elem)/(len(labels[i])+0.0) for elem in zip(*labels[i])))
 	########################################
 	assert len(new_centroids) == len(centroids)
 	return new_centroids
@@ -80,7 +100,10 @@ def hasconverged(old_centroids, new_centroids, epsilon=1e-1):
 
 	# TODO [task1]:
 	# Use Euclidean distance to measure centroid displacements.
-
+	for i1, i2 in zip(old_centroids, new_centroids):
+		if distance_euclidean(i1, i2) > epsilon:
+			return converged
+	converged = True
 	########################################
 	return converged
 
@@ -105,7 +128,12 @@ def iteration_many(data, centroids, distance, maxiter, algorithm, epsilon=1e-1):
 	# Stop only if convergence is reached, or if max iterations have been exhausted.
 	# Save the results of each iteration in all_centroids.
 	# Tip: use deepcopy() if you run into weirdness.
-
+	for _ in range(maxiter):
+		new_centroids = iteration_one(data, centroids, distance, algorithm)
+		all_centroids.append(new_centroids)
+		if (hasconverged(centroids, new_centroids, epsilon)):
+			return all_centroids
+		centroids = new_centroids
 	########################################
 	return all_centroids
 
@@ -123,7 +151,10 @@ def performance_SSE(data, centroids, distance):
 	# TODO [task1]:
 	# Calculate the Sum Squared Error of the clustering represented by centroids, on the data.
 	# Make sure to use the distance metric provided.
-
+	sse = 0.0
+	for dataPoint in data:
+		temp = min(tuple([distance(dataPoint, centroid) for centroid in centroids]))
+		sse += temp*temp
 	########################################
 	return sse
 
@@ -176,7 +207,9 @@ def distance_manhattan(p1, p2):
 
 	# TODO [task4]:
 	# Your function must work for all sized tuples.
-
+	distance = 0.0  # Initialization
+	for x1, x2 in zip(p1, p2):
+		distance += abs((x1 - x2))
 	########################################
 	return distance
 
@@ -195,7 +228,30 @@ def kmedians_iteration_one(data, centroids, distance):
 	# TODO [task4]:
 	# You must find the new cluster centroids.
 	# Perform just 1 iteration (assignment+updation) of k-medians algorithm.
-
+	labels = []
+	for _ in range(len(centroids)):
+		labels.append([])
+	for dataPoint in data:
+		distances = tuple([distance(dataPoint, centroid) for centroid in centroids])
+		minimumDistance = min(distances)
+		label = 0
+		for index, dist in enumerate(distances):
+			if minimumDistance == dist:
+				label = index
+		labels[label].append(dataPoint)
+	for i in range(len(labels)):
+		if (labels[i] == []):
+			new_centroids.append(centroids[i])
+		else:
+			new_centroid = []
+			for elem in zip(*labels[i]):
+				l = list(elem)
+				l.sort()
+				if (len(l) % 2 == 0):
+					new_centroid.append((l[(len(l)-1)//2] + l[(len(l)+1)//2])/2.0)
+				else:
+					new_centroid.append(l[len(l)//2])
+			new_centroids.append(tuple(new_centroid))
 	########################################
 	assert len(new_centroids) == len(centroids)
 	return new_centroids
@@ -214,7 +270,10 @@ def performance_L1(data, centroids, distance):
 	# TODO [task4]:
 	# Calculate the L1-norm error of the clustering represented by centroids, on the data.
 	# Make sure to use the distance metric provided.
-
+	l1_error = 0.0
+	for dataPoint in data:
+		temp = min(tuple([distance(dataPoint, centroid) for centroid in centroids]))
+		l1_error += temp
 	########################################
 	return l1_error
 
@@ -278,16 +337,26 @@ def iteration_one(data, centroids, distance, algorithm):
 def parse():
 	parser = argparse.ArgumentParser()
 	parser.add_argument(dest='input', type=str, help='Dataset filename')
-	parser.add_argument('-a', '--algorithm', dest='algorithm', type=str, help='Algorithm to use - {kmeans, kmedians}. Default: kmeans', default='kmeans')
-	parser.add_argument('-i', '--init', '--initialization', dest='init', type=str, default='forgy', help='The initialization algorithm to be used - {forgy, kmeans++}. Default: forgy')
-	parser.add_argument('-o', '--output', dest='output', type=str, help='Output filename. If not provided, centroids are not saved.')
-	parser.add_argument('-m', '--iter', '--maxiter', dest='maxiter', type=int, default=1000, help='Maximum number of iterations of the algorithm to perform (may stop earlier if convergence is achieved). Default: 1000')
-	parser.add_argument('-e', '--eps', '--epsilon', dest='epsilon', type=float, default=1e-3, help='Minimum distance the cluster centroids move b/w two consecutive iterations for the algorithm to continue. Default: 1e-3')
-	parser.add_argument('-k', '--k', dest='k', type=int, default=8, help='The number of clusters to use. Default: 8')
-	parser.add_argument('-s', '--seed', dest='seed', type=int, default=0, help='The RNG seed. Default: 0')
-	parser.add_argument('-n', '--numexperiments', dest='numexperiments', type=int, default=1, help='The number of experiments to run. Default: 1')
-	parser.add_argument('--outliers',dest='outliers',default=False,action='store_true',help='Flag for visualizing data without outliers. If provided, outliers are not plotted.')
-	parser.add_argument('--verbose',dest='verbose',default=False,action='store_true',help='Turn on verbose.')
+	parser.add_argument('-a', '--algorithm', dest='algorithm', type=str,
+	                    help='Algorithm to use - {kmeans, kmedians}. Default: kmeans', default='kmeans')
+	parser.add_argument('-i', '--init', '--initialization', dest='init', type=str, default='forgy',
+	                    help='The initialization algorithm to be used - {forgy, kmeans++}. Default: forgy')
+	parser.add_argument('-o', '--output', dest='output', type=str,
+	                    help='Output filename. If not provided, centroids are not saved.')
+	parser.add_argument('-m', '--iter', '--maxiter', dest='maxiter', type=int, default=1000,
+	                    help='Maximum number of iterations of the algorithm to perform (may stop earlier if convergence is achieved). Default: 1000')
+	parser.add_argument('-e', '--eps', '--epsilon', dest='epsilon', type=float, default=1e-3,
+	                    help='Minimum distance the cluster centroids move b/w two consecutive iterations for the algorithm to continue. Default: 1e-3')
+	parser.add_argument('-k', '--k', dest='k', type=int, default=8,
+	                    help='The number of clusters to use. Default: 8')
+	parser.add_argument('-s', '--seed', dest='seed', type=int,
+	                    default=0, help='The RNG seed. Default: 0')
+	parser.add_argument('-n', '--numexperiments', dest='numexperiments',
+	                    type=int, default=1, help='The number of experiments to run. Default: 1')
+	parser.add_argument('--outliers', dest='outliers', default=False, action='store_true',
+	                    help='Flag for visualizing data without outliers. If provided, outliers are not plotted.')
+	parser.add_argument('--verbose', dest='verbose', default=False,
+	                    action='store_true', help='Turn on verbose.')
 	_a = parser.parse_args()
 
 	args = {}
@@ -337,7 +406,7 @@ def visualize_data(data, all_centroids, args):
 	for c, points in zip(colors, clusters):
 		x = [p[0] for p in points]
 		y = [p[1] for p in points]
-		plt.scatter(x,y, c=c)
+		plt.scatter(x, y, c=c)
 
 	if not args['outliers']:
 		# plot each cluster centroid
@@ -347,16 +416,18 @@ def visualize_data(data, all_centroids, args):
 		for c, clusterindex in zip(colors, range(k)):
 			x = [iteration[clusterindex][0] for iteration in all_centroids]
 			y = [iteration[clusterindex][1] for iteration in all_centroids]
-			plt.plot(x,y, '-x', c=c, linewidth='1', mew=15, ms=2)
+			plt.plot(x, y, '-x', c=c, linewidth='1', mew=15, ms=2)
 	plt.show()
 
 
 def visualize_performance(data, all_centroids, distance):
 	if distance == distance_euclidean:
-		errors = [performance_SSE(data, centroids, distance) for centroids in all_centroids]
+		errors = [performance_SSE(data, centroids, distance)
+                    for centroids in all_centroids]
 		ylabel = 'Sum Squared Error'
 	else:
-		errors = [performance_L1(data, centroids, distance) for centroids in all_centroids]
+		errors = [performance_L1(data, centroids, distance)
+                    for centroids in all_centroids]
 		ylabel = 'L1-norm Error'
 	plt.plot(range(len(all_centroids)), errors)
 	plt.title('Performance plot')
@@ -384,7 +455,8 @@ if __name__ == '__main__':
 		# Initialize centroids
 		centroids = []
 		if args['init'] == initialization_forgy:
-			centroids = args['init'](data, args['k'])  # Forgy doesn't need distance metric
+			# Forgy doesn't need distance metric
+			centroids = args['init'](data, args['k'])
 		else:
 			centroids = args['init'](data, args['dist'], args['k'])
 
@@ -394,7 +466,8 @@ if __name__ == '__main__':
 			print ''
 
 		# Run clustering algorithm
-		all_centroids = iteration_many(data, centroids, args['dist'], args['maxiter'], args['algorithm'], args['epsilon'])
+		all_centroids = iteration_many(
+			data, centroids, args['dist'], args['maxiter'], args['algorithm'], args['epsilon'])
 
 		if args['dist'] == distance_euclidean:
 			error = performance_SSE(data, all_centroids[-1], args['dist'])
@@ -405,8 +478,10 @@ if __name__ == '__main__':
 		totalerror += error
 		totaliter += len(all_centroids)-1
 		print '{}: {}'.format(error_str, error)
-		print 'Number of iterations till termination: {}'.format(len(all_centroids)-1)
-		print 'Convergence achieved: {}'.format(hasconverged(all_centroids[-1], all_centroids[-2]))
+		print 'Number of iterations till termination: {}'.format(
+			len(all_centroids)-1)
+		print 'Convergence achieved: {}'.format(
+			hasconverged(all_centroids[-1], all_centroids[-2]))
 
 		if verbose:
 			print '\nFinal centroids:'
@@ -414,7 +489,8 @@ if __name__ == '__main__':
 			print ''
 
 	print '\n\nAverage error: {}'.format(float(totalerror)/args['numexperiments'])
-	print 'Average number of iterations: {}'.format(float(totaliter)/args['numexperiments'])
+	print 'Average number of iterations: {}'.format(
+		float(totaliter)/args['numexperiments'])
 
 	if args['numexperiments'] == 1:
 		# save the result
