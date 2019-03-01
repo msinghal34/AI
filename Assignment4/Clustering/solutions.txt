@@ -1,5 +1,5 @@
-Name:
-Roll number:
+Name: Mayank Singhal
+Roll number:  160050039
 ========================================
 
 
@@ -25,12 +25,12 @@ Answer:
 
 Dataset     |  Initialization | Average SSE  | Average Iterations
 ==================================================================
-   100.csv  |        forgy    |             |
-   100.csv  |        kmeans++ |             |
-  1000.csv  |        forgy    |             |
-  1000.csv  |        kmeans++ |             |
- 10000.csv  |        forgy    |             |
- 10000.csv  |        kmeans++ |             |
+   100.csv  |        forgy    |8472.63311469| 2.43
+   100.csv  |        kmeans++ |8472.63311469| 2.0
+  1000.csv  |        forgy    |21337462.2968| 3.28
+  1000.csv  |        kmeans++ |19887301.0042| 3.16
+ 10000.csv  |        forgy    |168842238.612| 21.1
+ 10000.csv  |        kmeans++ |22323178.8625| 7.5
 
 
 ================

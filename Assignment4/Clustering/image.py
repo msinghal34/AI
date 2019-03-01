@@ -25,7 +25,29 @@ def read_image(filename):
 	# Afterwards, all data in the file corresponds to the actual image.
 	# You can read the data byte by byte and update corresponding element of 'img' variable.
 	# For more information on PPM and PGM file formats, refer to the link mentioned in the assignment document.
-
+	with open(filename, 'r') as f:
+		line = f.readline().split()
+		format = line[0]
+		line = f.readline().split()
+		width = int(line[0])
+		height = int(line[1])
+		f.readline()	#	Reading Redundant number for maximum value of pixel
+		if format == "P5":
+			img = [[0 for _ in range(width)] for _ in range(height)]
+			for i in range(height):
+				for j in range(width):
+					character = f.read(1)
+					img[i][j] =  int(character.encode('hex'), 16)
+		else:
+			img = [[[0 for _ in range(3)] for _ in range(width)] for _ in range(height)]
+			for i in range(height):
+				for j in range(width):
+					red = f.read(1)
+					green = f.read(1)
+					blue = f.read(1)
+					img[i][j][0] = int(red.encode('hex'), 16)
+					img[i][j][1] = int(green.encode('hex'), 16)
+					img[i][j][2] = int(blue.encode('hex'), 16)
 	return img
 
 
@@ -38,7 +60,15 @@ def preprocess_image(img):
 	data = [(None,None,None)]
 	# todo: task5
 	# You need to convert the image such that data is a list of datapoints on which you want to do clustering and each datapoint in the list is a 3-tuple with RGB values.
-
+	data = []
+	if type(img[0][0] == int):	# Gray Image
+		for i in range(len(img)):
+			for j in range(len(img[0])):
+				data.append(tuple(img[i][j]))
+	else:	# RGB Image
+		for i in range(len(img)):
+			for j in range(len(img[0])):
+				data.append(tuple(img[i][j]))
 	return data
 
 
@@ -58,6 +88,15 @@ def label_image(img, cluster_centroids):
 	cluster_labels = None
 	# todo: task6
 	# Iterate over the image pixels and replace each pixel value with cluster number corresponding to its nearest cluster centroid
+	# processedImage = preprocess_image(img)
+	height = len(img)
+	width = len(img[0])
+	cluster_labels = [[0 for _ in range(width)] for _ in range(height)]
+	
+	for i in range(height):
+		for j in range(width):
+			distances = [distance(tuple(img[i][j]), elem) for elem in cluster_centroids]
+			cluster_labels[i][j] = distances.index(min(distances))
 
 	return cluster_labels
 
@@ -75,8 +114,30 @@ def write_image(filename, img):
 	# Next line should contain the maximum value of any pixel in the image (use max function to find it). Note that this should be an integer and within (0-255)
 	# Next line onwards should contain the actual image content as per the binary PPM or PGM file format.
 
+	gray = True if type(img[0][0]) == int else False
+	
+	height = len(img)
+	width = len(img[0])
+	imgFormat = "P5\n" if gray else "P6\n"
+	maximum = max(max(img)) if gray else max(max(max(img)))
+	# MY TODO check maximum for errors
+	
+	with open(filename, 'w') as f:
+		header = "".join([ch.encode("hex")
+                  for ch in imgFormat + str(width) + " " + str(height) + "\n" + str(maximum) + "\n"])
+		f.write(header)
+		for i in range(height):
+			for j in range(width):
+				l = img[i][j]
+				if gray:
+					f.write('{:x}'.format(l))
+				else:
+					f.write(format(l[0], '0x'))
+					f.write(" ")
+					f.write(format(l[1], '0x'))
+					f.write(" ")
+					f.write(format(l[2], '0x'))
 	pass
-
 
 ########################################################################
 #                              Task 7                                  #
