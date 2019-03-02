@@ -31,13 +31,13 @@ def read_image(filename):
 		line = f.readline().split()
 		width = int(line[0])
 		height = int(line[1])
-		f.readline()	#	Reading Redundant number for maximum value of pixel
+		f.readline()  # Reading Redundant number for maximum value of pixel
 		if format == "P5":
 			img = [[0 for _ in range(width)] for _ in range(height)]
 			for i in range(height):
 				for j in range(width):
 					character = f.read(1)
-					img[i][j] =  int(character.encode('hex'), 16)
+					img[i][j] = ord(character)
 		else:
 			img = [[[0 for _ in range(3)] for _ in range(width)] for _ in range(height)]
 			for i in range(height):
@@ -45,9 +45,9 @@ def read_image(filename):
 					red = f.read(1)
 					green = f.read(1)
 					blue = f.read(1)
-					img[i][j][0] = int(red.encode('hex'), 16)
-					img[i][j][1] = int(green.encode('hex'), 16)
-					img[i][j][2] = int(blue.encode('hex'), 16)
+					img[i][j][0] = ord(red)
+					img[i][j][1] = ord(green)
+					img[i][j][2] = ord(blue)
 	return img
 
 
@@ -61,11 +61,11 @@ def preprocess_image(img):
 	# todo: task5
 	# You need to convert the image such that data is a list of datapoints on which you want to do clustering and each datapoint in the list is a 3-tuple with RGB values.
 	data = []
-	if type(img[0][0] == int):	# Gray Image
+	if type(img[0][0] == int):  # Gray Image
 		for i in range(len(img)):
 			for j in range(len(img[0])):
 				data.append(tuple(img[i][j]))
-	else:	# RGB Image
+	else:  # RGB Image
 		for i in range(len(img)):
 			for j in range(len(img[0])):
 				data.append(tuple(img[i][j]))
@@ -92,7 +92,7 @@ def label_image(img, cluster_centroids):
 	height = len(img)
 	width = len(img[0])
 	cluster_labels = [[0 for _ in range(width)] for _ in range(height)]
-	
+
 	for i in range(height):
 		for j in range(width):
 			distances = [distance(tuple(img[i][j]), elem) for elem in cluster_centroids]
@@ -115,28 +115,26 @@ def write_image(filename, img):
 	# Next line onwards should contain the actual image content as per the binary PPM or PGM file format.
 
 	gray = True if type(img[0][0]) == int else False
-	
+
 	height = len(img)
 	width = len(img[0])
 	imgFormat = "P5\n" if gray else "P6\n"
 	maximum = max(max(img)) if gray else max(max(max(img)))
 	# MY TODO check maximum for errors
-	
+
 	with open(filename, 'w') as f:
-		header = "".join([ch.encode("hex")
-                  for ch in imgFormat + str(width) + " " + str(height) + "\n" + str(maximum) + "\n"])
+		header = imgFormat + str(width) + " " + str(height) + \
+                    "\n" + str(maximum) + "\n"
 		f.write(header)
 		for i in range(height):
 			for j in range(width):
 				l = img[i][j]
 				if gray:
-					f.write('{:x}'.format(l))
+					f.write(chr(l))
 				else:
-					f.write(format(l[0], '0x'))
-					f.write(" ")
-					f.write(format(l[1], '0x'))
-					f.write(" ")
-					f.write(format(l[2], '0x'))
+					f.write(chr(l[0]))
+					f.write(chr(l[1]))
+					f.write(chr(l[2]))
 	pass
 
 ########################################################################
@@ -157,7 +155,14 @@ def decompress_image(cluster_labels, cluster_centroids):
 	# todo: task7
 	# Iterate over the 2D list's elements and replace each value (cluster label) with value of its corresponding cluster centroid
 	# Use distance function (using distance from cluster.py to find the nearest cluster)
-
+	threeD = True if len(cluster_centroids[0]) == 3 else False
+	height = len(cluster_labels)
+	width = len(cluster_labels[0])
+	img = [[[0 for _ in range(3)] for _ in range(width)] for _ in range(
+		height)] if threeD else [[0 for _ in range(width)] for _ in range(height)]
+	for i in range(height):
+		for j in range(width):
+			img[i][j] = [int(item) for item in cluster_centroids[cluster_labels[i][j]]]
 	return img
 
 

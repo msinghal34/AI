@@ -5,10 +5,9 @@ https://docs.python.org/2/library/functions.html#min
 https://docs.python.org/3.4/howto/sorting.html#sorting-basics
 https://docs.python.org/2/tutorial/inputoutput.html#reading-and-writing-files
 https://docs.python.org/2/library/stdtypes.html#str.split
-https://stackoverflow.com/questions/444591/how-to-convert-a-string-of-bytes-into-an-int-in-python
-https://stackoverflow.com/questions/2269827/how-to-convert-an-int-to-a-hex-string
-https://stackoverflow.com/questions/35536670/how-to-convert-ascii-to-hex-in-python/35536716
+https://docs.python.org/2/library/stdtypes.html#str.join
 https://docs.python.org/3/tutorial/datastructures.html#more-on-lists
+https://stackoverflow.com/questions/704152/how-can-i-convert-a-character-to-a-integer-in-python-and-viceversa
 
 https://en.wikipedia.org/wiki/Median
 https://en.wikipedia.org/wiki/Netpbm_format
