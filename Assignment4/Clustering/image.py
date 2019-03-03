@@ -119,8 +119,14 @@ def write_image(filename, img):
 	height = len(img)
 	width = len(img[0])
 	imgFormat = "P5\n" if gray else "P6\n"
-	maximum = max(max(img)) if gray else max(max(max(img)))
-	# MY TODO check maximum for errors
+	if gray:
+		maximum = max([max(x) for x in img])
+	else:
+		max2 = []
+		for x in img:
+			l = [max(y) for y in x]
+			max2.append(max(l))
+		maximum = max(max2)
 
 	with open(filename, 'w') as f:
 		header = imgFormat + str(width) + " " + str(height) + \
