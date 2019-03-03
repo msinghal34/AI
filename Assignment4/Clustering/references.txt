@@ -1,13 +1,20 @@
-https://docs.python.org/2/library/random.html#random.sample
-https://stackoverflow.com/questions/5438745/is-it-possible-to-set-a-number-to-nan-or-infinity
-https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
-https://docs.python.org/2/library/functions.html#min
-https://docs.python.org/3.4/howto/sorting.html#sorting-basics
-https://docs.python.org/2/tutorial/inputoutput.html#reading-and-writing-files
-https://docs.python.org/2/library/stdtypes.html#str.split
-https://docs.python.org/2/library/stdtypes.html#str.join
-https://docs.python.org/3/tutorial/datastructures.html#more-on-lists
-https://stackoverflow.com/questions/704152/how-can-i-convert-a-character-to-a-integer-in-python-and-viceversa
+https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/la-4/lab-assignment-4.html
 
-https://en.wikipedia.org/wiki/Median
-https://en.wikipedia.org/wiki/Netpbm_format
+1)	Python Related Syntax
+	a)	https://docs.python.org/2/
+	b)	https://docs.python.org/2/library/random.html
+	c)	https://docs.python.org/2/library/random.html#random.sample
+	d)	https://stackoverflow.com/questions/5438745/is-it-possible-to-set-a-number-to-nan-or-infinity
+	e)	https://www.geeksforgeeks.org/python-unzip-a-list-of-tuples/
+	f)	https://docs.python.org/2/library/functions.html#min
+	g)	https://docs.python.org/3.4/howto/sorting.html#sorting-basics
+	h)	https://docs.python.org/2/tutorial/inputoutput.html#reading-and-writing-files
+	i)	https://docs.python.org/2/library/stdtypes.html#str.split
+	j)	https://docs.python.org/2/library/stdtypes.html#str.join
+	k)	https://docs.python.org/3/tutorial/datastructures.html#more-on-lists
+	l)	https://stackoverflow.com/questions/704152/how-can-i-convert-a-character-to-a-integer-in-python-and-viceversa
+	m)	https://www.tutorialspoint.com/python/list_index.htm
+
+2)	Theoretical Doubts
+	a)	https://en.wikipedia.org/wiki/Median
+	b)	https://en.wikipedia.org/wiki/Netpbm_format

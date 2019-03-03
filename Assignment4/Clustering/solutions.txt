@@ -9,11 +9,14 @@ Roll number:  160050039
 
 
 1. Run your code on datasets/garden.csv, with different values of k. Looking at the performance plots, does the SSE of k-means algorithm ever increase as the iterations are made? (1 mark)
-Answer: No, it never increases. Theoretically it should not increase ever.
+Answer: No, it never increases (acc. to what I found). Theoretically also, it should not increase. Both centroid updation and relocating cluster decrease SSE. So, after every iteration SSE decreases or remains same and thus gets converged. This statement ignores errors caused due to floating point approximations. Otherwise, it might slightly increase for some iteration.
 
 3. Look at the files 3lines.png and mouse.png. Manually draw cluster boundaries around the 3 clusters visible in each file (no need to submit the hand drawn clusters). Test the k-means algorithm on the datasets datasets/3lines.csv and datasets/mouse.csv. How does the algorithm’s clustering compare with the clustering you would do by hand? Why do you think this happens? (1 mark)
-Answer:
-
+Answer:	
+In 3lines.csv:	Instead of having 3 lines as separate clusters, it has clusters where some clusters contain points belonging to 2 lines.
+In mouse.csv:	Instead of clustering ears separately from the face of mouse, it is taking some part of the face with ears as well.
+This is happening because in kmeans clustering we are minimizing SSE (Sum Squared Error) which is not a correct proxy for what we (humans) classify as cluster. e.g., If I initialize 3 centroids as the middle points of each line, then I am able to do generate 3 lines as 3 different clusters but it has an SSE of 4415. Whereas with forgy initialization, SSE is close to 3056 and with kmeans++, it is even lesser (around 3015).
+In conclusion, first of all final clustering depends on the initialization of centroids. Secondly, SSE is not even a correct proxy for what we humans classify as clusters.
 
 
 ================
@@ -21,7 +24,20 @@ Answer:
 ================
 
 1. For each dataset, with kmeansplusplus initialization algorithm, report “average SSE” and "average iterations". Explain the results. (2 mark)
-Answer: 
+Answer: Results
+a)	average number of iterations is increasing as the number of data points are increasing.
+	Because of large number of datapoints, the centroid keeps shifting (due to inclusion and exclusion of some data points) for large number of iterations. Thus, convergence takes more number of iterations.
+
+b)	average SSE is increasing as the number of data points are increasing.
+	Since, every datapoint contributes something non-negative towards SSE. So, more the datapoints more the SSE.
+
+c)	average SSE is usually lesser for kmeans++ as compared to forgy initialization.
+	Since, kmeans++ initialiaztion tries to find sufficiently separated initial centroids which helps it in avoiding some sub-optimal clusterings (caused due to local clustering). Thus, average SSE for kmeans++ is lesser.
+
+d)	average number of iterations is usually lesser for kmeans++ as compared to forgy initialization.
+	Because of sufficiently separated initial centroids with kmeans++, the shifting of datapoints from one cluster to another is less probable causing kmeans++ to converge faster.
+
+
 
 Dataset     |  Initialization | Average SSE  | Average Iterations
 ==================================================================
@@ -38,7 +54,7 @@ Dataset     |  Initialization | Average SSE  | Average Iterations
 ================
 
 1. Can you observe from the visualization that k-medians algorithm is more robust to outliers as compared to k-means? Why do you think this happens? (1.5 marks)
-Answer: k-medians is more robust to outliers as compared to k-means.
+Answer:	After ignoring outliers, we get more clusters in the data (free of outliers) if we use k-medians whereas in k-means it usually allocates a separate cluster to outliers. So, yes k-medians is more robust to outliers as compared to k-means. This happens because k-medians algorithm minimizes L1-norm error instead of L2-norm error. And L1-norm error gets minimized if centroid is the median of the data whereas L2-norm gets minimized when centroid is the mean of the data. Median is insensitive to outliers whereas mean is not. So, the updation of centroid in k-medians is insensitive to outliers. Thus, we get better clustering with k-medians algorithm.
 
 ================
   TASK 8
@@ -49,4 +65,5 @@ Answer: As we reduce the number of clusters the quality of decompressed image re
 
 
 2. You can observe that for the small number of clusters, the degree of compression (original size/compressed size) is about the same as that of when we use larger number of clusters even though we need to store lesser number of colors. Can you tell why? How can we increase this ratio in case of smaller number of clusters? [1 mark]
-Answer: 
+Answer: Compressed size includes size of compressed.pgm and the size of image_centroids.csv. Now, compressed.pgm size is exactly same for any value of k because it is a 2D matrix containing the index of closest centroid for each pixel in the image. image_centroids.csv size is proprtional to k because it contains k tuples where each tuple contain 3 floating point numbers (double). So, image_centroids.csv (3*k double) size is very small as compared to the size of compressed.pgm (height*width integers) for smaller values of k. So, the degree of compression is almost same when we have lesser number of clusters.
+We can increase the compression ratio for smaller values of k by using only log(k) bits to store index of closest centroid for each pixel in compressed.pgm instead of using 32 bits. We can further improve it by using huffman coding where we also take into account the number of pixels each color has.
