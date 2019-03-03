@@ -1,6 +1,7 @@
 import sys
 import cluster
 import image
+import itertools
 from math import sqrt
 
 
@@ -17,6 +18,26 @@ ALLOWED_IMPORTS = [
     'import random',
     'import math'
 ]
+
+
+def compare(a, b):
+    if isinstance(a, list):
+        same = True
+        for i,j in itertools.izip_longest(a,b):
+            try:
+                same = same and isclose(i,j)
+            except Exception:
+                same = same and (i==j)
+    else:
+        try:
+            same = isclose(a,b)
+        except Exception:
+            same = (a==b)
+    return same
+
+
+def isclose(a, b, rel_tol=1e-09, abs_tol=0.0):
+    return abs(a-b) <= max(rel_tol * max(abs(a), abs(b)), abs_tol)
 
 
 def check_imports(filename):
@@ -68,7 +89,7 @@ def grade1():
                 ret = getattr(cluster,function)(*inp)
             except Exception:
                 ret = None
-            if ret != out:
+            if not compare(ret, out):
                 print 'Function {} failed a testcase.\n\tInput: {}\n\tExpected return: {}\n\tRecieved return: {}\n'.format(function, str(inp)[1:-1], out, ret)
                 passed = False
         print '  {}  Function {}'.format([u'\u2718', u'\u2713'][passed].encode('utf8'), function)
@@ -159,7 +180,7 @@ def grade4():
                 ret = getattr(cluster,function)(*inp)
             except Exception:
                 ret = None
-            if ret != out:
+            if not compare(ret, out):
                 print 'Function {} failed a testcase.\n\tInput: {}\n\tExpected return: {}\n\tRecieved return: {}\n'.format(function, str(inp)[1:-1], out, ret)
                 passed = False
         print '  {}  Function {}'.format([u'\u2718', u'\u2713'][passed].encode('utf8'), function)
@@ -193,7 +214,7 @@ def grade5():
                 ret = getattr(image,function)(*inp)
             except Exception:
                 ret = None
-            if ret != out:
+            if not compare(ret, out):
                 print 'Function {} failed a testcase.\n\tInput: {}\n\tExpected return: {}\n\tRecieved return: {}\n'.format(function, str(inp)[1:-1], out, ret)
                 passed = False
         print '  {}  Function {}'.format([u'\u2718', u'\u2713'][passed].encode('utf8'), function)
@@ -243,7 +264,7 @@ def grade7():
             ret = getattr(image,function)(*inp)
         except Exception:
             ret = None
-        if ret != out:
+        if not compare(ret, out):
             print 'Function {} failed a testcase.\n\tInput: {}\n\tExpected return: {}\n\tRecieved return: {}\n'.format(function, str(inp)[1:-1], out, ret)
             passed = False
     print '  {}  Function {}'.format([u'\u2718', u'\u2713'][passed].encode('utf8'), function)
@@ -260,7 +281,7 @@ def grade7():
                 ret = ret.split(None, 4)
         except Exception:
             ret = None
-        if ret != out:
+        if not compare(ret, out):
             print 'Function {} failed a testcase.\n\tInput: {}\n'.format(function, str(inp)[1:-1])
             passed = False
     print '  {}  Function {}'.format([u'\u2718', u'\u2713'][passed].encode('utf8'), function)
@@ -298,7 +319,7 @@ def grade8():
             ret = getattr(image,function)(*inp)
         except Exception:
             ret = None
-        if ret != out:
+        if not compare(ret, out):
             print 'Function {} failed a testcase.\n\tInput: {}\n\tExpected return: {}\n\tRecieved return: {}\n'.format(function, str(inp)[1:-1], out, ret)
             passed = False
     print '  {}  Function {}'.format([u'\u2718', u'\u2713'][passed].encode('utf8'), function)
