@@ -1,0 +1,9 @@
+Ridge Gradient Descent:
+    lambda = 12.429
+    Final SSE on test data = 540303471169.8229
+Lasso Gradient Descent:
+    lambda = 
+    Final SSE on test data = 
+
+SSE v/s lambda plot helps us in figuring out where the minima of the SSE v/s lambda curve lies.
+After getting the minima, we get an estimate of the vicinity of optimal lambda. Then we repeat the curve for lambdas in that vicinity.
