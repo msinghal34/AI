@@ -1,6 +1,5 @@
 import numpy as np
 from utils import *
-import time
 
 def preprocess(X, Y):
 	''' TASK 0
@@ -61,13 +60,13 @@ def ridge_grad_descent(X, Y, _lambda, max_iter=30000, lr=0.00001, epsilon = 1e-4
 	XTX = np.matmul(XT, X)
 	XTY = np.matmul(XT, Y)
 	weights = np.zeros((D, 1))
-	hasnotConverged = True
-	while (max_iter != 0) and hasnotConverged:
+	notConverged = True
+	while (max_iter != 0) and notConverged:
 		max_iter -= 1
 		grad = 2*(-XTY + np.matmul(XTX, weights) + _lambda*weights)
-		weights = weights -lr*grad
-		if (ridge_objective(X, Y, weights, _lambda) <= epsilon):
-			hasnotConverged = False
+		weights -= lr*grad
+		if (np.linalg.norm(grad) <= epsilon):
+			notConverged = False
 	return weights
 
 def k_fold_cross_validation(X, Y, k, lambdas, algo):
@@ -102,36 +101,23 @@ def coord_grad_descent(X, Y, _lambda, max_iter=1000):
 	Return the trained weight vector [D X 1] after performing gradient descent using Ridge Loss Function 
 	'''
 	D = X.shape[1]
-	epsilon = 1.0e-4
-	weights = np.zeros((D, 1))
-	sum_xi = []
-	x_prime = []
-	x_d = []
-	xdoty = []
-	for d in range(D):
-		sum_xi.append(np.dot(X[:, d], X[:, d]))
-		x_prime.append(np.concatenate((X[:, :d], X[:, d+1:]), axis=1))
-		x_d.append(X[:,d])
-		xdoty.append(np.dot(x_d[d], Y))
+	W = np.zeros((D, 1))
 	for _ in range(max_iter):
-		if (lasso_objective(X, Y, weights, _lambda) <= epsilon):
-			return weights
-		else:
-			for d in range(D):
-				if (sum_xi[d] == 0):
-					weights[d] = 0.0
+		for d in range(D):
+			den = np.dot(X[:, d], X[:, d])
+			if (den == 0):
+				W[d] = 0.0
+			else:
+				num = np.dot(X[:, d], np.squeeze(Y - np.matmul(X, W)) + W[d]*X[:, d])
+				alpha = (num - _lambda/2.0)
+				beta = (num + _lambda/2.0)
+				if alpha >= 0.0:
+					W[d] = alpha/den
+				elif beta <= 0.0:
+					W[d] = beta/den
 				else:
-					w_prime = np.concatenate((weights[:d], weights[d+1:]))
-					sum_xyi = xdoty[d] - np.dot(x_d[d], np.matmul(x_prime[d], w_prime))
-					alpha = (sum_xyi - _lambda/2.0)
-					beta = (sum_xyi + _lambda/2.0)
-					if alpha >= 0.0:
-						weights[d] = alpha/sum_xi[d]
-					elif beta <= 0.0:
-						weights[d] = beta/sum_xi[d]
-					else:
-						weights[d] = 0.0
-	return weights
+					W[d] = 0.0
+	return W
 
 if __name__ == "__main__":
 	# Do your testing for Kfold Cross Validation in by experimenting with the code below 
@@ -139,6 +125,21 @@ if __name__ == "__main__":
 	X, Y = preprocess(X, Y)
 	trainX, trainY, testX, testY = separate_data(X, Y)
 	
-	lambdas = [12.429] # Assign a suitable list Task 5 need best SSE on test data so tune lambda accordingly
-	scores = k_fold_cross_validation(trainX, trainY, 6, lambdas, ridge_grad_descent)
-	plot_kfold(lambdas, scores)
+	lambda_ridge = 12.429
+	weights_ridge = ridge_grad_descent(trainX, trainY, lambda_ridge)
+	sse_ridge = sse(testX, testY, weights_ridge)
+
+	lambda_lasso = 4.24*1e5
+	weights_lasso = coord_grad_descent(trainX, trainY, lambda_lasso)
+	sse_lasso = sse(testX, testY, weights_lasso)
+	
+	print ("SSE Ridge: ", sse_ridge)
+	print ("SSE Lasso: ", sse_lasso)
+
+	lambdas_ridge = [12.40, 12.41, 12.429, 12.44, 12.45] # Assign a suitable list Task 5 need best SSE on test data so tune lambda accordingly
+	lambdas_lasso = [4.22*1e5, 4.23*1e5, 4.24*1e5, 4.25*1e5, 4.26*1e5] # Assign a suitable list Task 5 need best SSE on test data so tune lambda accordingly
+
+	scores_ridge = k_fold_cross_validation(trainX, trainY, 6, lambdas_ridge, ridge_grad_descent)
+	plot_kfold(lambdas_ridge, scores_ridge)
+	scores_lasso = k_fold_cross_validation(trainX, trainY, 6, lambdas_lasso, coord_grad_descent)
+	plot_kfold(lambdas_lasso, scores_lasso)

@@ -1,9 +1,26 @@
+TASK 4:
+
 Ridge Gradient Descent:
     lambda = 12.429
-    Final SSE on test data = 540303471169.8229
+    max_iter = 30000
+    lr = 0.00001
+    Final SSE on test data = 540303471169.8232
 Lasso Gradient Descent:
-    lambda = 
-    Final SSE on test data = 
+    lambda = 4.24*1e5
+    max_iter = 1000
+    Final SSE on test data = 527880087867.86816
 
-SSE v/s lambda plot helps us in figuring out where the minima of the SSE v/s lambda curve lies.
-After getting the minima, we get an estimate of the vicinity of optimal lambda. Then we repeat the curve for lambdas in that vicinity.
+Q 1)  how does this plot help you tune the lambda?
+A 1)  SSE v/s lambda plot helps us in figuring out where the minima of the SSE v/s lambda curve lies.
+After getting the minima, we get an estimate of the vicinity of optimal lambda. Then we repeat the curve for lambdas in that vicinity for tuning it properly.
+
+Q 2)  explain the plots
+A 2)  Plots are convex in nature which helps us to locate the minima easily.
+
+TASK 5:
+
+Q 3)  Is there something unusual with the solution of Lasso compared to the Ridge? 
+Explain why such a thing would happen? Is using lasso advantageous compared to ridge. How? 
+A 3)  Lasso solution give several features a weight exactly equal to 0.
+This happens because a tangent (empirical cost) is more likely to intersect the hypercube (complexity cost) at one of its corner which lies on axes. This is not the case with ridge solution because there the complexity cost is a hypersphere which is rotationally invariant and has no corners as such.
+Using lasso is advantageous, because lasso takes care of redundant features along with regularization.

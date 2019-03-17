@@ -1,1 +1,22 @@
-https://docs.scipy.org/doc/numpy/reference/generated/numpy.split.html
+https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/la-5/lab-assignment-5.html
+
+1)	Python Related Syntax
+	a)	https://docs.python.org/2/
+    b)  https://docs.python.org/3/
+
+2)  Numpy Related Syntax
+    a)  http://cs231n.github.io/python-numpy-tutorial/
+    b)  https://docs.scipy.org/doc/numpy/reference/
+    c)  https://docs.scipy.org/doc/numpy/reference/generated/numpy.split.html
+    d)  https://docs.scipy.org/doc/numpy/reference/generated/numpy.concatenate.html
+    e)  https://docs.scipy.org/doc/numpy/reference/generated/numpy.squeeze.html 
+    f)  https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.append.html
+    g)  https://docs.scipy.org/doc/numpy/reference/generated/numpy.matmul.html#numpy.matmul
+    h)  https://docs.scipy.org/doc/numpy/reference/generated/numpy.dot.html
+
+3)	Theoretical Doubts
+    a)  Section 18.6, Russell and Norvig (2010).
+    b)  https://en.wikipedia.org/wiki/Coordinate_descent
+    c)  https://web.stanford.edu/class/ee392o/subgrad.pdf
+    d)  https://machinelearningmastery.com/k-fold-cross-validation/
+    e)  https://en.wikipedia.org/wiki/Lasso_(statistics)
