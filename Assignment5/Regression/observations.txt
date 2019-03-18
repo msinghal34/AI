@@ -4,18 +4,18 @@ Ridge Gradient Descent:
     lambda = 12.429
     max_iter = 30000
     lr = 0.00001
-    Final SSE on test data = 540303471169.8232
+    Final SSE on test data = 540303471169.8229
 Lasso Gradient Descent:
-    lambda = 4.24*1e5
+    lambda = 3.40*1e5
     max_iter = 1000
-    Final SSE on test data = 527880087867.86816
+    Final SSE on test data = 534714154036.8136
 
 Q 1)  how does this plot help you tune the lambda?
-A 1)  SSE v/s lambda plot helps us in figuring out where the minima of the SSE v/s lambda curve lies.
-After getting the minima, we get an estimate of the vicinity of optimal lambda. Then we repeat the curve for lambdas in that vicinity for tuning it properly.
+A 1)  SSE v/s lambda plot helps us in figuring out where does a minima of the SSE v/s lambda curve lies.
+After getting the minima, we get an estimate of the vicinity of an local optimal lambda. Then we repeat the curve for lambdas in that vicinity for tuning it properly.
 
 Q 2)  explain the plots
-A 2)  Plots are convex in nature which helps us to locate the minima easily.
+A 2)  For ridge regression, plot is convex and has single local minima. But for lasso regresion, plot is not convex and it has atleast two minimas at lambda = 3.40*1e5 and 4.24*1e5.
 
 TASK 5:
 

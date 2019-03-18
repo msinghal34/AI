@@ -129,15 +129,15 @@ if __name__ == "__main__":
 	weights_ridge = ridge_grad_descent(trainX, trainY, lambda_ridge)
 	sse_ridge = sse(testX, testY, weights_ridge)
 
-	lambda_lasso = 4.24*1e5
+	lambda_lasso = 3.40*1e5
 	weights_lasso = coord_grad_descent(trainX, trainY, lambda_lasso)
 	sse_lasso = sse(testX, testY, weights_lasso)
 	
 	print ("SSE Ridge: ", sse_ridge)
 	print ("SSE Lasso: ", sse_lasso)
 
-	lambdas_ridge = [12.40, 12.41, 12.429, 12.44, 12.45] # Assign a suitable list Task 5 need best SSE on test data so tune lambda accordingly
-	lambdas_lasso = [4.22*1e5, 4.23*1e5, 4.24*1e5, 4.25*1e5, 4.26*1e5] # Assign a suitable list Task 5 need best SSE on test data so tune lambda accordingly
+	lambdas_ridge = [12.41, 12.42, 12.429, 12.44, 12.45] # Assign a suitable list Task 5 need best SSE on test data so tune lambda accordingly
+	lambdas_lasso = [3.30*1e5, 3.35*1e5, 3.40*1e5, 3.45*1e5, 3.50*1e5] # Assign a suitable list Task 5 need best SSE on test data so tune lambda accordingly
 
 	scores_ridge = k_fold_cross_validation(trainX, trainY, 6, lambdas_ridge, ridge_grad_descent)
 	plot_kfold(lambdas_ridge, scores_ridge)
