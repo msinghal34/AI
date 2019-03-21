@@ -1,3 +1,6 @@
+import sys
+
+
 class Mdp:
     def __init__(self, mdpfileName):
         file = open(mdpfileName, 'r')
@@ -28,17 +31,20 @@ class Mdp:
             else:
                 print("Error: Initial Word is wrong")
         # Removing all empty actions from each state
-        for state, transitions in enumerate(self.transitionList):
-            for action, actions in enumerate(transitions):
-                if (actions == []):
-                    del self.transitionList[state][action]
+        for state in range(len(self.transitionList)):
+            while True:
+                try:
+                    self.transitionList[state].remove([])
+                except ValueError:
+                    break
 
     def printMdp(self):
         print(self.numStates)
         print(self.numActions)
         print(self.start)
         print(self.end)
-        print(self.transitionList)
+        for transition in self.transitionList:
+            print(transition)
         print(self.discount)
 
     def valueIteration(self):
@@ -76,8 +82,6 @@ class Mdp:
         return
 
 
-string = input("Enter file number: ")
-mdp = Mdp("data/mdp/mdpfile" + string + ".txt")
-# mdp.printMdp()
-# input("Press Enter to calculate optimal policy")
+mdpfileName = sys.argv[1]
+mdp = Mdp(mdpfileName)
 mdp.valueIteration()

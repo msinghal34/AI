@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 
 
 class Transition:
@@ -13,7 +14,7 @@ class Transition:
         return str("transition" + " " + str(self.s1) + " " + str(self.ac) + " " + str(self.s2) + " " + str(self.r) + " " + str(self.p))
 
 
-def createMDP(gridfile, mdpfile):
+def createMDP(gridfile):
     gridfile = open(gridfile, 'r')
     lines = gridfile.read().splitlines()
     gridfile.close()
@@ -76,17 +77,14 @@ def createMDP(gridfile, mdpfile):
             else:
                 print("Error: Unknown character in grid")
 
-    mdpfile = open(mdpfile, 'w')
-    print("numStates", numStates, file=mdpfile)
-    print("numActions", numActions, file=mdpfile)
-    print("start", start, file=mdpfile)
-    print("end", end, file=mdpfile)
+    print("numStates", numStates)
+    print("numActions", numActions)
+    print("start", start)
+    print("end", end)
     for transition in transitions:
-        print(transition, file=mdpfile)
-    print("discount", discount, file=mdpfile)
-    mdpfile.close()
+        print(transition)
+    print("discount", discount)
 
 
-gridfile = input("GridFile: ")
-mdpfile = input("MDPfile: ")
-createMDP(gridfile, mdpfile)
+gridfile = sys.argv[1]
+createMDP(gridfile)

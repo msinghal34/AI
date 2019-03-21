@@ -6,3 +6,6 @@ Printing of a list of objects:
 https://docs.python.org/3/library/stdtypes.html#str.split
 https://docs.python.org/3/tutorial/inputoutput.html
 https://docs.python.org/3/tutorial/classes.html
+https://docs.python.org/3.5/library/functions.html#print
+https://docs.python.org/3/library/exceptions.html#ValueError
+https://stackoverflow.com/questions/14155669/call-python-script-from-bash-with-argument
