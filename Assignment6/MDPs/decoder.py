@@ -25,16 +25,19 @@ def foo(valid_moves, current_state, action, p):
             distribution.append(p1)
         else:
             distribution.append(p2)
+    
     cumdist = list(itertools.accumulate(distribution))
     x = random.random() * cumdist[-1]
     choice = valid_moves[bisect.bisect(cumdist, x)]
+    
     state = choice[0]
     action = choice[2]
     printAction(action)
     return state
     
 
-def getPolicy(gridfile, value_and_policy_file, p=1):
+def getPolicy(gridfile, value_and_policy_file, p=1.0):
+    # print (p)
     mdp = MDP(gridfile)
 
     v_p_file = open(value_and_policy_file, 'r')
@@ -50,6 +53,10 @@ def getPolicy(gridfile, value_and_policy_file, p=1):
         valid_moves = mdp.validMoves[current_state]
         current_state = foo(valid_moves, current_state, int(action), p)
         action = value_policy[current_state][1]
+    print("")
+
+randomSeed = 0
+random.seed(randomSeed)
 
 gridfile = sys.argv[1]
 value_and_policy_file = sys.argv[2]

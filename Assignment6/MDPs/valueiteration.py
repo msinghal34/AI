@@ -85,5 +85,4 @@ class Mdp:
 
 mdpfileName = sys.argv[1]
 mdp = Mdp(mdpfileName)
-# mdp.printMdp()
 mdp.valueIteration()
