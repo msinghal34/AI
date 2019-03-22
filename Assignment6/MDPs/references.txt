@@ -9,3 +9,5 @@ https://docs.python.org/3/tutorial/classes.html
 https://docs.python.org/3.5/library/functions.html#print
 https://docs.python.org/3/library/exceptions.html#ValueError
 https://stackoverflow.com/questions/14155669/call-python-script-from-bash-with-argument
+https://docs.python.org/3/library/random.html
+https://stackoverflow.com/questions/41276067/importing-class-from-another-file

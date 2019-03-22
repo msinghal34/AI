@@ -1,3 +1,7 @@
 *.pyc
 *__pycache__*
 *vscode*
+*data.zip*
+*data/*
+*dataset/*
+*datasets/*

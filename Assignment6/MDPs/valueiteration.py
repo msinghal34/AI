@@ -48,6 +48,7 @@ class Mdp:
         print(self.discount)
 
     def valueIteration(self):
+        # print("Value Iteration started: ")
         old_values = [0.0]*self.numStates
         action_values = [-1]*self.numStates
         num_iters = 0
@@ -84,4 +85,5 @@ class Mdp:
 
 mdpfileName = sys.argv[1]
 mdp = Mdp(mdpfileName)
+# mdp.printMdp()
 mdp.valueIteration()
