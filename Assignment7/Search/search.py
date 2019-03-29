@@ -1,5 +1,5 @@
 import util
-from sudoku import SudokuSearchProblem
+from sudoku import SudokuSearchProblem, display
 from maps import MapSearchProblem
 
 ################ Node structure to use for the search algorithm ################
@@ -28,7 +28,25 @@ def sudokuDepthFirstSearch(problem):
         return ''.join(modl)
 
     ## YOUR CODE HERE
-    util.raiseNotDefined()
+    # print problem
+    frontier = util.Stack()
+    explored = set()
+    initialState = problem.getStartState()
+    frontier.push(initialState)
+    while not frontier.isEmpty():
+        choice = frontier.pop()
+        # print choice
+        if convertStateToHash(choice) not in explored:
+            if problem.isGoalState(choice):
+                return choice
+            successors = problem.getSuccessors(choice)
+            for successor in successors:
+                # display(successor[0])
+                # print(successor[1])
+                frontier.push(successor[0])
+        explored.add(convertStateToHash(choice))
+
+    # util.raiseNotDefined()
 
 ######################## A-Star and DFS for Map Problem ########################
 ## Choose some node to expand from the frontier with priority_queue like implementation
@@ -48,5 +66,19 @@ def heuristic(state, problem):
 def AStar_search(problem, heuristic=nullHeuristic):
 
     """Search the node that has the lowest combined cost and heuristic first."""
-
-    util.raiseNotDefined()
+    frontier = util.PriorityQueue()
+    explored = set()
+    initialState = problem.getStartState()
+    frontier.push(initialState, 1)
+    while not frontier.isEmpty():
+        choice = frontier.pop()
+        # print choice
+        if choice not in explored:
+            if problem.isGoalState(choice):
+                print choice
+                return choice
+            successors = problem.getSuccessors(choice)
+            for successor in successors:
+                frontier.push(successor[0], 1)
+        explored.add(choice)
+    # util.raiseNotDefined()

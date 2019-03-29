@@ -11,6 +11,7 @@ class MapSearchProblem:
     def  __init__(self, G, start_node, end_node):
         self.G = G
         self.start_node = start_node
+        # print type(self.start_node)
         self.end_node = end_node
         self.nodes_expanded = 0
 
@@ -18,14 +19,16 @@ class MapSearchProblem:
         """
         Returns the start state for the search problem.
         """
-        util.raiseNotDefined()
+        return self.start_node
+        # util.raiseNotDefined()
 
     def isGoalState(self, node):
         """
         node: Search state
         Returns True if node is the goal state otherwise False
         """
-        util.raiseNotDefined()
+        return node == self.end_node
+        # util.raiseNotDefined()
 
     def getSuccessors(self, node):
         """
@@ -42,7 +45,9 @@ class MapSearchProblem:
 
         successors = []
         ## YOUR CODE HERE
-        util.raiseNotDefined()
+        for neighbor in self.G.neighbors(node):
+            successors.append((neighbor, self.G[node][neighbor], self.G[node][neighbor][0]['length']))
+        # util.raiseNotDefined()
 
         return successors
 

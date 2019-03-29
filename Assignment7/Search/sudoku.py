@@ -117,7 +117,9 @@ class SudokuSearchProblem:
         """
         Returns the start state for the search problem.
         """
-        util.raiseNotDefined()
+        # display(self.values)
+        return self.values
+        # util.raiseNotDefined()
 
     def isGoalState(self, state):
         """
@@ -125,7 +127,8 @@ class SudokuSearchProblem:
 
         Returns True if and only if the state is a valid goal state.
         """
-        util.raiseNotDefined()
+        return solved(state)
+        # util.raiseNotDefined()
 
     def getSuccessors(self, state):
         """
@@ -142,8 +145,31 @@ class SudokuSearchProblem:
 
         successors = []
         ## YOUR CODE HERE
-        util.raiseNotDefined()
-        
+        # util.raiseNotDefined()
+        length = []
+        for square in state:
+            l = len(state[square])
+            if l > 1:
+                length.append(l)
+        minLength = min(length)
+        # display(state)
+        # print minLength
+        for square in state:
+            # print square
+            if len(state[square]) == minLength:
+                # print square
+                choices = state[square]
+                # print choices
+                for choice in choices:
+                    # print choice
+                    newstate = state.copy()
+                    if not (assign(newstate, square, choice) == False):
+                    # newstate[square] = choice
+                    # display(newstate)
+                        successors.append((newstate, (square, choice), 1))
+                # for item in successors:
+                #     print item
+                break        
         return successors
 
 # if __name__ == '__main__':
