@@ -92,7 +92,7 @@ def task1():
 	# Test the getSuccessors Function
 	curr_vals = parse_grid(grids[1])
 	succs = prob.getSuccessors(curr_vals)
-	if all(succ[0] == assign(curr_vals.copy(), succ[1][0], succ[1][1]) for succ in succs):
+	if len(succs) > 1 and all(succ[0] == assign(curr_vals.copy(), succ[1][0], succ[1][1]) for succ in succs):
 		marks_for_parts[2] += 2
 
 	marks_for_parts_str = [str(x) for x in marks_for_parts]
@@ -102,11 +102,11 @@ def task2():
 	marks_for_parts = [0] * 2
 	
 	times, ns_expanded, results = solve_all(from_file("data/sudoku/top95.txt"), "top95", None)
-	if sum(ns_expanded) / len(ns_expanded) < 35:
+	if all(results) and sum(ns_expanded) / len(ns_expanded) < 35:
 		marks_for_parts[0] += 1
 
 	times, ns_expanded, results = solve_all(from_file("data/sudoku/hardest.txt"), "hardest", None)
-	if sum(ns_expanded) / len(ns_expanded) < 15:
+	if all(results) and sum(ns_expanded) / len(ns_expanded) < 15:
 		marks_for_parts[1] += 1
 
 	marks_for_parts_str = [str(x) for x in marks_for_parts]
@@ -220,7 +220,7 @@ def task6(to_show):
 	problem = MapSearchProblem(G_iit, origin_node, final_node)
 	route_astar_iit = AStar_search(problem, heuristic)
 
-	if route_astar_iit == actual_route:
+	if route_astar_iit == actual_route and problem.nodes_expanded < 25:
 		marks_for_part += 1 
 	print "Number of nodes expanded for IIT: %d" % problem.nodes_expanded
 
@@ -229,7 +229,7 @@ def task6(to_show):
 	problem = MapSearchProblem(G_mumbai, origin_node, final_node)
 	route_astar_mumbai = AStar_search(problem, heuristic)
 
-	if route_astar_mumbai == actual_route:
+	if route_astar_mumbai == actual_route and problem.nodes_expanded < 15000:
 		marks_for_part += 1
 	print "Number of nodes expanded for Mumbai: %d" % problem.nodes_expanded
 

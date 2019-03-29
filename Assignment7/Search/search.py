@@ -3,6 +3,8 @@ from sudoku import SudokuSearchProblem, display
 from maps import MapSearchProblem
 
 ################ Node structure to use for the search algorithm ################
+
+
 class Node:
     def __init__(self, state, action, path_cost, parent_node, depth):
         self.state = state
@@ -12,14 +14,16 @@ class Node:
         self.depth = depth
 
 ########################## DFS for Sudoku ########################
-## Choose some node to expand from the frontier with Stack like implementation
+# Choose some node to expand from the frontier with Stack like implementation
+
+
 def sudokuDepthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
     """
 
     def convertStateToHash(values):
-        """ 
+        """
         values as a dictionary is not hashable and hence cannot be used directly in the explored set.
         This function changes values dict into a unique hashable string which can be used in the explored set.
         """
@@ -27,7 +31,7 @@ def sudokuDepthFirstSearch(problem):
         modl = [a+b for (a, b) in l]
         return ''.join(modl)
 
-    ## YOUR CODE HERE
+    # YOUR CODE HERE
     # print problem
     frontier = util.Stack()
     explored = set()
@@ -44,12 +48,13 @@ def sudokuDepthFirstSearch(problem):
                 # display(successor[0])
                 # print(successor[1])
                 frontier.push(successor[0])
-        explored.add(convertStateToHash(choice))
+            explored.add(convertStateToHash(choice))
 
     # util.raiseNotDefined()
 
 ######################## A-Star and DFS for Map Problem ########################
-## Choose some node to expand from the frontier with priority_queue like implementation
+# Choose some node to expand from the frontier with priority_queue like implementation
+
 
 def nullHeuristic(state, problem=None):
     """
@@ -58,27 +63,49 @@ def nullHeuristic(state, problem=None):
     """
     return 0
 
+
 def heuristic(state, problem):
     # It would take a while for Flat Earther's to get accustomed to this paradigm
     # but hang in there.
-    util.raiseNotDefined()
+    current = problem.G.node[state.state]
+    final = problem.G.node[problem.end_node]
+    clon = (current['x'], 0, 0)
+    clat = (current['y'], 0, 0)
+    flon = (final['x'], 0, 0)
+    flat = (final['y'], 0, 0)
+    hn = util.points2distance((clon, clat), (flon, flat))
+    return hn
+    # util.raiseNotDefined()
+
 
 def AStar_search(problem, heuristic=nullHeuristic):
-
     """Search the node that has the lowest combined cost and heuristic first."""
-    frontier = util.PriorityQueue()
+    def getRoute(node):
+        route = []
+        route.insert(0, node.state)
+        while node.action != -1:
+            node = node.parent_node
+            route.insert(0, node.state)
+        return route
+
+    def function(state):
+        h = heuristic(state, problem)
+        g = state.path_cost
+        return g + h
+
+    frontier = util.PriorityQueueWithFunction(function)
     explored = set()
-    initialState = problem.getStartState()
-    frontier.push(initialState, 1)
+    start_node = Node(problem.getStartState(), -1, 0.0, -1, 1)
+    frontier.push(start_node)
     while not frontier.isEmpty():
         choice = frontier.pop()
-        # print choice
-        if choice not in explored:
-            if problem.isGoalState(choice):
-                print choice
-                return choice
-            successors = problem.getSuccessors(choice)
+        if choice.state not in explored:
+            if problem.isGoalState(choice.state):
+                return getRoute(choice)
+            successors = problem.getSuccessors(choice.state)
             for successor in successors:
-                frontier.push(successor[0], 1)
-        explored.add(choice)
+                node = Node(successor[0], successor[1], choice.path_cost +
+                            successor[2], choice, choice.depth+1)
+                frontier.push(node)
+            explored.add(choice.state)
     # util.raiseNotDefined()

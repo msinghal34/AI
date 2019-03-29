@@ -11,7 +11,6 @@ class MapSearchProblem:
     def  __init__(self, G, start_node, end_node):
         self.G = G
         self.start_node = start_node
-        # print type(self.start_node)
         self.end_node = end_node
         self.nodes_expanded = 0
 
