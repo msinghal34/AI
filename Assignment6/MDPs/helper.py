@@ -30,7 +30,7 @@ class MDP:
         l, b = self.grid.shape
 
         reward = -1
-        finalreward = 100000000
+        finalreward = 0
         # Stores the mapping from coordinates in grid to state number : List of numbers
         self.state = np.array([[-1]*b]*l, dtype=np.int64)
         # Stores the mapping from each state number to its coordinates in grid : List of tuples
