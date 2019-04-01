@@ -8,7 +8,6 @@ def cross(A, B):
     "Cross product of elements in A and elements in B."
     return [a+b for a in A for b in B]
     
-
 digits   = '123456789'
 rows     = 'ABCDEFGHI'
 cols     = digits
@@ -74,7 +73,7 @@ def task1():
 	grids[0] = '3.6.7...........518.........1.4.5...7.....6.....2......2.....4.....8.3.....5.....'
 	grids[1] = '85...24..72......9..4.........1.7..23.5...9...4...........8..7..17..........36.4.'
 	grids[2] = '003020600900305001001806400008102900700000008006708200002609500800203009005010300'
-
+	corner_case = {'G7': '1', 'G6': '3', 'G5': '5', 'G4': '6', 'G3': '2', 'G2': '9', 'G1': '8', 'G9': '4', 'G8': '7', 'C9': '2', 'C8': '1', 'C3': '5', 'C2': '8', 'C1': '6', 'C7': '169', 'C6': '4', 'C5': '3', 'C4': '7', 'A9': '5', 'A8': '3', 'F1': '', 'F2': '4', 'F3': '6', 'F4': '5', 'F5': '1', 'F6': '2', 'F7': '3', 'F8': '9', 'F9': '8', 'B4': '1', 'B5': '6', 'B6': '5', 'B7': '', 'B1': '2', 'B2': '3', 'B3': '9', 'B8': '4', 'B9': '7', 'I9': '3', 'I8': '5', 'I1': '1', 'I3': '4', 'I2': '6', 'I5': '7', 'I4': '8', 'I7': '2', 'I6': '9', 'A1': '4', 'A3': '7', 'A2': '1', 'E9': '7', 'A4': '9', 'A7': '8', 'A6': '', 'E5': '8', 'E4': '3', 'E7': '4', 'E6': '6', 'E1': '9', 'E3': '1', 'E2': '5', 'E8': '2', 'A5': '2', 'H8': '8', 'H9': '6', 'H2': '7', 'H3': '3', 'H1': '5', 'H6': '1', 'H7': '9', 'H4': '2', 'H5': '4', 'D8': '6', 'D9': '1', 'D6': '7', 'D7': '5', 'D4': '4', 'D5': '9', 'D2': '2', 'D3': '8', 'D1': ''}
 	marks_for_parts = [0,0,0]
 	for grid in grids:
 		prob = SudokuSearchProblem(parse_grid(grid))
@@ -93,8 +92,10 @@ def task1():
 	curr_vals = parse_grid(grids[1])
 	succs = prob.getSuccessors(curr_vals)
 	if len(succs) > 1 and all(succ[0] == assign(curr_vals.copy(), succ[1][0], succ[1][1]) for succ in succs):
-		marks_for_parts[2] += 2
-
+		marks_for_parts[2] += 1
+	
+	if len(prob.getSuccessors(corner_case)) == 0:
+		marks_for_parts[2] += 1
 	marks_for_parts_str = [str(x) for x in marks_for_parts]
 	return ' + '.join(marks_for_parts_str) + " = " + str(sum(marks_for_parts)), 3
 

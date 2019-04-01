@@ -1,0 +1,8 @@
+https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/la-7/lab-assignment-7.html
+
+1)	Python Related Syntax
+	https://docs.python.org/2/
+2)  NetworkX
+    https://networkx.github.io/documentation/stable/index.html
+3)	Theoretical Doubts
+    Section 3.1, 3.2, 3.5, 3.6 Russell and Norvig (2010)

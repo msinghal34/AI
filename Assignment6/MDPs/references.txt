@@ -1,11 +1,29 @@
-https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/rl.pdf
-https://stackoverflow.com/questions/12933964/printing-a-list-of-objects-of-user-defined-class
-https://docs.python.org/3/library/stdtypes.html#str.split
-https://docs.python.org/3/tutorial/inputoutput.html
-https://docs.python.org/3/tutorial/classes.html
-https://docs.python.org/3.5/library/functions.html#print
-https://docs.python.org/3/library/exceptions.html#ValueError
-https://stackoverflow.com/questions/14155669/call-python-script-from-bash-with-argument
-https://docs.python.org/3/library/random.html
-https://stackoverflow.com/questions/41276067/importing-class-from-another-file
-https://docs.python.org/3.5/library/random.html
+https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/la-6/lab-assignment-6.html
+
+1)	Python Related Syntax
+	https://docs.python.org/2/
+    https://docs.python.org/3/
+    https://docs.python.org/3/tutorial/inputoutput.html
+    https://docs.python.org/3/tutorial/classes.html
+    https://docs.python.org/2/library/itertools.html
+    https://docs.python.org/3/library/sys.html
+    https://docs.python.org/3/library/stdtypes.html#str.split
+    https://docs.python.org/3.5/library/functions.html#print
+    https://docs.python.org/3/library/exceptions.html#ValueError
+    https://docs.python.org/3/library/random.html
+    https://docs.python.org/3.0/library/bisect.html
+    https://stackoverflow.com/questions/12933964/printing-a-list-of-objects-of-user-defined-class
+    https://stackoverflow.com/questions/41276067/importing-class-from-another-file
+
+2)  Numpy Related Syntax
+    http://cs231n.github.io/python-numpy-tutorial/
+    https://docs.scipy.org/doc/numpy/reference/
+
+3)  Bash Syntax
+    https://stackoverflow.com/questions/14155669/call-python-script-from-bash-with-argument
+
+4)  Matplotlib
+    https://matplotlib.org/tutorials/introductory/pyplot.html
+
+5)	Theoretical Concepts
+    https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/rl.pdf

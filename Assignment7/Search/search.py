@@ -1,5 +1,5 @@
 import util
-from sudoku import SudokuSearchProblem, display
+from sudoku import SudokuSearchProblem
 from maps import MapSearchProblem
 
 ################ Node structure to use for the search algorithm ################
@@ -20,41 +20,38 @@ class Node:
 def sudokuDepthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
+    Return the final values dictionary, i.e. the values dictionary which is the goal state  
     """
 
     def convertStateToHash(values):
-        """
-        values as a dictionary is not hashable and hence cannot be used directly in the explored set.
+        """ 
+        values as a dictionary is not hashable and hence cannot be used directly in the explored/visited set.
         This function changes values dict into a unique hashable string which can be used in the explored set.
+        You may or may not use this
         """
         l = list(sorted(values.items()))
         modl = [a+b for (a, b) in l]
         return ''.join(modl)
 
     # YOUR CODE HERE
-    # print problem
     frontier = util.Stack()
     explored = set()
     initialState = problem.getStartState()
     frontier.push(initialState)
     while not frontier.isEmpty():
         choice = frontier.pop()
-        # print choice
         if convertStateToHash(choice) not in explored:
             if problem.isGoalState(choice):
                 return choice
             successors = problem.getSuccessors(choice)
             for successor in successors:
-                # display(successor[0])
-                # print(successor[1])
                 frontier.push(successor[0])
             explored.add(convertStateToHash(choice))
-
     # util.raiseNotDefined()
+
 
 ######################## A-Star and DFS for Map Problem ########################
 # Choose some node to expand from the frontier with priority_queue like implementation
-
 
 def nullHeuristic(state, problem=None):
     """
@@ -67,6 +64,10 @@ def nullHeuristic(state, problem=None):
 def heuristic(state, problem):
     # It would take a while for Flat Earther's to get accustomed to this paradigm
     # but hang in there.
+    """
+        Takes the state and the problem as input and returns the heuristic for the state
+        Returns a real number(Float)
+    """
     current = problem.G.node[state.state]
     final = problem.G.node[problem.end_node]
     clon = (current['x'], 0, 0)
@@ -79,7 +80,11 @@ def heuristic(state, problem):
 
 
 def AStar_search(problem, heuristic=nullHeuristic):
-    """Search the node that has the lowest combined cost and heuristic first."""
+    """
+        Search the node that has the lowest combined cost and heuristic first.
+        Return the route as a list of nodes(Int) iterated through starting from the first to the final.
+    """
+
     def getRoute(node):
         route = []
         route.insert(0, node.state)

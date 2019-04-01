@@ -30,7 +30,7 @@ class MDP:
         l, b = self.grid.shape
 
         reward = -1
-        finalreward = 0
+        finalreward = 100000000
         # Stores the mapping from coordinates in grid to state number : List of numbers
         self.state = np.array([[-1]*b]*l, dtype=np.int64)
         # Stores the mapping from each state number to its coordinates in grid : List of tuples
@@ -97,9 +97,9 @@ class MDP:
                         if direction == move[2]:
                             self.transitions.append(Transition(
                                 self.state[i][j], move[2], move[0], move[1], p1))
-                        elif p2 != 0.0:
+                        if direction != move[2] and p2 != 0.0:
                             self.transitions.append(Transition(
-                                self.state[i][j], move[2], move[0], move[1], p2))
+                                self.state[i][j], direction, move[0], move[1], p2))
             else:
                 self.validMoves.append([])
 

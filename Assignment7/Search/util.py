@@ -708,7 +708,7 @@ def recalculate_coordinate(val, _as=None):
   
 def points2distance(start, end):  
     """ 
-    Calculate distance (in kilometers) between two points given as (long, latt) pairs 
+    Calculate distance (in meters) between two points given as (long, latt) pairs 
     based on Haversine formula (http://en.wikipedia.org/wiki/Haversine_formula). 
     Implementation inspired by JavaScript implementation from http://www.movable-type.co.uk/scripts/latlong.html 
     Accepts coordinates as tuples (deg, min, sec), but coordinates can be given in any form - e.g. 

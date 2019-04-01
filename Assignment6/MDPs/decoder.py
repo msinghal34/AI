@@ -2,19 +2,24 @@ import numpy as np
 import sys
 from helper import *
 import random
+import time
 import itertools
 import bisect
 
-def printAction(action):
-    if action == 0:
-        print("E", end=' ')
-    elif action == 1:
-        print("W", end=' ')
-    elif action == 2:
-        print("N", end=' ')
-    elif action == 3:
-       print("S", end=' ')
+def printAction(path):
+    pathstr = []
+    for action in path:
+        if action == 0:
+            pathstr.append("E")
+        elif action == 1:
+            pathstr.append("W")
+        elif action == 2:
+            pathstr.append("N")
+        elif action == 3:
+            pathstr.append("S")
+    print(*pathstr, sep=' ', end='\n')
 
+path = []
 def foo(valid_moves, current_state, action, p):
     l = len(valid_moves)
     distribution = []
@@ -32,12 +37,11 @@ def foo(valid_moves, current_state, action, p):
     
     state = choice[0]
     action = choice[2]
-    printAction(action)
+    path.append(action)
     return state
     
 
 def getPolicy(gridfile, value_and_policy_file, p=1.0):
-    # print (p)
     mdp = MDP(gridfile)
 
     v_p_file = open(value_and_policy_file, 'r')
@@ -53,7 +57,7 @@ def getPolicy(gridfile, value_and_policy_file, p=1.0):
         valid_moves = mdp.validMoves[current_state]
         current_state = foo(valid_moves, current_state, int(action), p)
         action = value_policy[current_state][1]
-    print("")
+    printAction(path)
 
 randomSeed = 0
 random.seed(randomSeed)
