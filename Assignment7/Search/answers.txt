@@ -1,11 +1,15 @@
 Task 3 : Why DFS Algorithm? Can we perform informed search?
 Can we implement informed search techniques like A star for this Problem? Answer with respect to both path cost and heuristic.
-- 
-
+-	
+	Cost(n.n') = 1, where node n' has exactly one choice less ({1,2} instead of {1,2,3}) for exactly one unit (e.g., A1) when compared to node n.
+	h(n) = Number of units left to be filled in the sudoku. This is a consistent heurestic as h(n) <= cost(n,n') + h(n').
+	But, It will work almost like BFS which would take billion of years to solve sudoku due to a huge number of states.
 
 Task 7 : Why A* Algorithm? Possible Heuristic for Travelling Student Problem:
-
 What would have been the number of nodes visited in case we used a simple Shortest Path Problem Algorithm like Dijikstra's?
-- 
+- 	Dijkstra's algorithm would have visited the number of nodes same as that of UCS.
+	Number of nodes expanded for IIT: 80
+	Number of nodes expanded for Mumbai: 26743
+
 Also in case the problem would have required you to reach multiple nodes what possible heuristic can you come up with for A*?
-- 
+-	A possible heuristic is the maximum of (displacement between current node and the unvisited goal nodes). It is a consistent heuristic and thus applicable for A*.

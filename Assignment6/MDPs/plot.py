@@ -19,6 +19,8 @@ for prob in probabilities:
 		for w in f.readline().split():
 			count += 1
 	counts.append(count)
+print(probabilities)
+print(counts)
 plt.plot(probabilities, counts)
 plt.xlabel("Probability")
 plt.ylabel("Expected number of steps")

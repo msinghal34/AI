@@ -1,4 +1,5 @@
-plot.png
+Observartions for plot.png:
+As the probability of successful communication increases, the length of the path usually decreases. When there was a zero probability of successful transition the path length in this case is 528 but it will vary on changing the random seed. When p = 1, the path is optimal with a length of 22.
 
-
-path.png
+Observartions for path.png:
+Since, this is a path generated from a stochastic MDP it is not an optimal path. Because of randomness, the agent keeps taking same dead ends again and again thus creating leaflets in visualization. It goes over the start state to a wrong direction and then comes back to right track after several such moves. Obvioulsy, the path starts from the start state and ends at the end state.
