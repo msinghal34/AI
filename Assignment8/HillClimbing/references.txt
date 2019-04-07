@@ -1,0 +1,3 @@
+https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/la-8/lab-assignment-8.html
+
+https://docs.python.org/2.3/whatsnew/section-slices.html

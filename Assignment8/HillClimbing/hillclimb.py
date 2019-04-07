@@ -137,8 +137,21 @@ def generate2optNeighbours(tour):
     all_possible_neighbours = []
 
     "*** YOUR CODE HERE ***"
-    
-
+    for i in range(cities-2):
+        for j in range(i+2, cities):
+            if i == 0 and j == cities-1:
+                continue
+            l = []
+            for k in range(i+1):
+                l.append(tour[k])
+            l.append(tour[j])
+            between = tour[i+1:j]
+            between.reverse()
+            l.extend(between)
+            for k in range(j+1, cities):
+                l.append(tour[k])
+            all_possible_neighbours.append(l)
+    assert len(all_possible_neighbours) == ((cities*(cities-1))/2 - cities)
     "*** --------------  ***"
     return all_possible_neighbours
 
@@ -147,8 +160,45 @@ def generate3optNeighbours(tour):
     all_possible_neighbours = []
 
     "*** YOUR CODE HERE ***"
-    
-
+    for i in range(0, cities-4, 1):
+        for j in range(i+2, cities-2, 1):
+            for k in range(j+2, cities, 1):
+                if i == 0 and k == cities-1:
+                    continue
+                # Route 1
+                l = []
+                l.extend(tour[:i+1])
+                l.extend(tour[j:i:-1])
+                l.extend(tour[k:j:-1])
+                l.extend(tour[k+1:])
+                # print(l)
+                all_possible_neighbours.append(l)
+                # Route 2
+                l = []
+                l.extend(tour[:i+1])
+                l.extend(tour[k:j:-1])
+                l.extend(tour[i+1:j+1:1])
+                l.extend(tour[k+1:])
+                # print(l)
+                all_possible_neighbours.append(l)
+                # Route 3
+                l = []
+                l.extend(tour[:i+1])
+                l.extend(tour[j+1:k+1])
+                l.extend(tour[i+1:j+1])
+                l.extend(tour[k+1:])
+                # print(l)
+                all_possible_neighbours.append(l)
+                # Route 4
+                l = []
+                l.extend(tour[:i+1])
+                l.extend(tour[j+1:k+1])
+                l.extend(tour[j:i:-1])
+                l.extend(tour[k+1:])
+                # print(l)
+                all_possible_neighbours.append(l)
+    # print(len(all_possible_neighbours))
+    assert len(all_possible_neighbours) == ((cities*(cities-1)*(cities-2))/6 - cities*(cities-3))*4
     "*** --------------  ***"
     return all_possible_neighbours    
 
@@ -160,7 +210,7 @@ def generate3optand2optNeighbours(tour):
     optNeighbours3 = generate3optNeighbours(tour)
     all_possible_neighbours = optNeighbours2 + optNeighbours3
     # uncomment this line to check the number of neighbours
-    # print(len(all_possible_neighbours), len(optNeighbours2), len(optNeighbours3))
+    print(len(all_possible_neighbours), len(optNeighbours2), len(optNeighbours3))
     return all_possible_neighbours
 
 def generateRandomNeighbour(tour):
@@ -200,7 +250,16 @@ def hillClimbFull(initial_tour, getNeighbours):
     minTour = []
 
     "*** YOUR CODE HERE ***"
-    
+    minTour = initial_tour
+    condition = True
+    while condition:
+        neighbors = generate2optNeighbours(minTour)
+        tourLength = [getTourLength(neighbor) for neighbor in neighbors]
+        minTourLength = min(tourLength)
+        condition = minTourLength < getTourLength(minTour)
+        if condition:
+            minTour = neighbors[tourLength.index(minTourLength)]
+            tourLengthList.append(getTourLength(minTour))
     "*** --------------  ***"
     return tourLengthList, minTour
 
@@ -210,7 +269,12 @@ def nearestNeighbourTour(initial_city):
     global cities
 
     "*** YOUR CODE HERE ***"
-    
+    tour.append(initial_city)
+    while len(tour) != cities:
+        distances = [(int(city in tour), getDistance(nodeDict[initial_city], nodeDict[city])) for city in range(1, cities+1)]
+        minIndex = distances.index(min(distances))+1
+        tour.append(minIndex)
+        initial_city = minIndex
     "*** --------------  ***"
     return tour
 
@@ -220,7 +284,9 @@ def eucledianTour(initial_city):
 
     "*** YOUR CODE HERE ***"
     # part 1
-    
+    for i in range(1, cities):
+        for j in range(i+1, cities+1):
+            edgeList.append([i,j,getDistance(nodeDict[i], nodeDict[j])])
     "*** --------------  ***"
 
     '''KRUSKAL's algorithm'''
@@ -234,20 +300,44 @@ def eucledianTour(initial_city):
         if(find(x[0],x[1]) == False):
             mst.append((x[0],x[1]))
             union(x[0],x[1])
-
     '''FINISHES HERE'''
     fin_ord = finalOrder(mst, initial_city)
     return fin_ord
-
-
-
 
 
 def finalOrder(mst, initial_city):
     fin_order = []
     "*** YOUR CODE HERE ***"
     # for part 3
-    
+    visited = [False]*(len(mst)+1)
+    stack = Stack()
+    visited[initial_city-1] = True
+    stack.push(initial_city)
+    fin_order.append(initial_city)
+    city = initial_city
+    while not stack.isEmpty():
+        var = True
+        for item in mst:
+            if (item[0] == city and visited[item[1]-1] == False):
+                stack.push(item[1])
+                fin_order.append(item[1])
+                visited[item[1]-1] = True
+                city = item[1]
+                var = False
+                break
+            if (item[1] == city and visited[item[0]-1] == False):
+                stack.push(item[0])
+                fin_order.append(item[0])
+                visited[item[0]-1] = True
+                city = item[0]
+                var = False
+                break
+        if var == True:
+            stack.pop()
+            if (stack.isEmpty()):
+                break
+            city = stack.pop()
+            stack.push(city)
     "*** --------------  ***"
     return fin_order
 
@@ -292,7 +382,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.submit:
-        takeInput("data/st70.tsp");
+        takeInput("data/st70.tsp")
     elif args.file:
         takeInput(args.file)
     elif args.cities:
