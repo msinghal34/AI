@@ -1,0 +1,25 @@
+Compare the graphs task2_submit.png , task3_submit.png and task4_submit.png and write down your observations in observations.txt. Comment on which initialisation method is better and why that is the case.
+--	In task 2, we used random initialization of the tour
+	In task 3, we used nearest neighbor approach rather than random
+	In task 4, we used euclidean approximation to initialise the tour which has guarantees with it.
+
+	Euclidean approximation is the best way of initialisation as it has the guarantee to find a tour within twice the length of the optimal tour. It also converges to that tour in less number of iterations.
+	Nearest Neighbor construction gives us slightly better answers for some choices of initial city. But it doesn't give any guarantees like the euclidean approximation.
+	The random initialisation gives longer tours as compared to other initialisation approaches and also takes more number of iterations to converge.
+	So, I would say euclidean > nearest neighbor > random initialisation in terms of their betterness.
+
+Visually inspect the two graphs task2_submit.png and task6_submit.png and write down your observations in observations.txt. Comment on which neighbour-generating method is better (if at all) and why?
+--	Both graphs (3opt+2optNeighbors vs only 2optNeighbors) keep finding better tour by searching in their respective neighbourhood untill convergence. So, the length of the minimum tour found so far keeps decreasing with number of steps taken untill convergence. 3optNeighbors+2optNeighbors is almost as same as 2optNeighbors in terms of finding a tour with shorter length. 
+It is because of random initialisations that even with 3optNeighbors it couldn't find something much better than 2optNeighbors.
+Generating 3optNeighbors at every step takes a huge amount of time O(n**3) and even then it gives no better tour. Thus, 2optNeighbor generating method is better with random initialization.
+
+Compare the two graphs task3_submit.png and task7_submit.png and write down your observations in observations.txt. Comment your opinion on which neighbour generating method is better in this case and why?
+--	Both graphs (3opt+2optNeighbors vs only 2optNeighbors) keep finding better tour by searching in their respective neighbourhood untill convergence. So, the length of the minimum tour found so far keeps decreasing with number of steps taken untill convergence. 
+3optNeighbors+2optNeighbors converges in lesser steps as compared to 2optNeighbors.
+3optNeighbors+2optNeighbors is better than 2optNeighbors in terms of finding a tour with shorter length. It is because (3opt+2opt) gets to see a larger number of different tours which include both 2optNeighbor and 3optNeighbor mutations of the initial tour and gets the chance to be more greedy while taking a step.
+But it takes some more time to generate all those 3optNeighbors so many times. So, the betterness depends on how closer results you want to the optimal tour given the time you are willing to spend on it.
+
+Now Compare the graphs task4_submit.png and task8_submit.png and write down your observations in observations.txt. Comment your opinion on which neighbour generating method is better in this case and why?
+--	Both graphs (3opt+2optNeighbors vs only 2optNeighbors) keep finding better tour by searching in their respective neighbourhood untill convergence. So, the length of the minimum tour found so far keeps decreasing with number of steps taken untill convergence. 
+3optNeighbors+2optNeighbors is better than 2optNeighbors in terms of finding a tour with shorter length. It is because (3opt+2opt) gets to see a larger number of different tours which include both 2optNeighbor and 3optNeighbor mutations of the initial tour and gets the chance to be more greedy while taking a step.
+It takes only a slightly more time as compared to 2optNeighbor and give better results. So, in this case 3opt+2optNeighbor is better than only 2optNeighbors.

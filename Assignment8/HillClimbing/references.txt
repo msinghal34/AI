@@ -1,3 +1,11 @@
 https://www.cse.iitb.ac.in/~shivaram/teaching/cs337+335-s2019/resources/la-8/lab-assignment-8.html
 
-https://docs.python.org/2.3/whatsnew/section-slices.html
+1)	Python Related Syntax
+	https://docs.python.org/2/
+    https://docs.python.org/3/
+    https://docs.python.org/2.3/whatsnew/section-slices.html
+    https://stackoverflow.com/questions/14517101/what-does-extended-slice-syntax-actually-do-for-negative-steps
+
+2)	Theoretical Concepts
+	Reading: Section 4.1, Russell and Norvig (2010).
+	https://en.wikipedia.org/wiki/Tree_traversal#Pre-order
