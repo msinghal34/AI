@@ -253,13 +253,15 @@ def hillClimbFull(initial_tour, getNeighbours):
     minTour = initial_tour
     condition = True
     while condition:
-        neighbors = generate2optNeighbours(minTour)
+        neighbors = getNeighbours(minTour)
         tourLength = [getTourLength(neighbor) for neighbor in neighbors]
         minTourLength = min(tourLength)
         condition = minTourLength < getTourLength(minTour)
         if condition:
             minTour = neighbors[tourLength.index(minTourLength)]
             tourLengthList.append(getTourLength(minTour))
+    # Not needed just to have images looking same as given but this has a caveat for tasks after number 4
+    tourLengthList.append(getTourLength(minTour))
     "*** --------------  ***"
     return tourLengthList, minTour
 
